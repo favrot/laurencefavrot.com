@@ -1,83 +1,70 @@
-:root {
-  --ink: #1c1c1a;
-  --muted: #6b6a64;
-  --faint: #a3a29a;
-  --bg: #fcfbf8;
-  --accent: #185fa5;
-  --rule: #e4e2d9;
+/* laurencefavrot.com — Dusk & Paper */
+:root{
+  --dusk:#1e1c19; --dusk-line:#35322c;
+  --ink-on-dusk:#e8e2d6; --muted-on-dusk:#b8b1a2; --faint-on-dusk:#8f887a;
+  --amber:#d9a05b; --amber-dim:rgba(217,160,91,.4);
+  --paper:#f7f2e7; --paper-line:#e5dcc8;
+  --ink:#2b2620; --body:#453e35; --faint:#a3987f; --faint-italic:#8c8069;
+  --amber-paper:#b07a34; --amber-paper-dim:rgba(176,122,52,.35);
+  --serif:'EB Garamond',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ink: #e8e6df;
-    --muted: #a3a29a;
-    --faint: #6b6a64;
-    --bg: #191917;
-    --accent: #7fb3e8;
-    --rule: #33322e;
-  }
-}
-* { box-sizing: border-box; }
-body {
-  font-family: Charter, Georgia, 'Times New Roman', serif;
-  background: var(--bg);
-  color: var(--ink);
-  margin: 0;
-  line-height: 1.65;
-  font-size: 19px;
-}
-main {
-  max-width: 42rem;
-  margin: 0 auto;
-  padding: 3.5rem 1.4rem 5rem;
-}
-nav {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 15px;
-  margin-bottom: 3rem;
-  color: var(--faint);
-}
-nav a { color: var(--muted); text-decoration: none; margin-right: 1.1rem; }
-nav a:hover { color: var(--accent); }
-nav a.here { color: var(--ink); }
-h1 { font-size: 1.85rem; line-height: 1.25; margin: 0 0 0.4rem; font-weight: 600; }
-h2 { font-size: 1.25rem; margin: 2.2rem 0 0.6rem; font-weight: 600; }
-p { margin: 0 0 1.1rem; }
-a { color: var(--accent); }
-.sub {
-  color: var(--muted);
-  font-size: 1.02rem;
-  margin-bottom: 2rem;
-}
-.date {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 14px;
-  color: var(--faint);
-  margin-bottom: 2rem;
-}
-ul { padding-left: 1.2rem; margin: 0 0 1.1rem; }
-li { margin-bottom: 0.45rem; }
-hr { border: none; border-top: 1px solid var(--rule); margin: 2.4rem 0; }
-blockquote {
-  margin: 1.4rem 0;
-  padding-left: 1.1rem;
-  border-left: 3px solid var(--rule);
-  color: var(--muted);
-  font-style: italic;
-}
-.item { margin-bottom: 1.6rem; }
-.item .kicker {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--faint);
-}
-footer {
-  margin-top: 4rem;
-  padding-top: 1.4rem;
-  border-top: 1px solid var(--rule);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 14px;
-  color: var(--faint);
-}
-footer a { color: var(--muted); }
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--serif);font-size:18.5px;line-height:1.66;
+  display:flex;justify-content:center;min-height:100vh}
+main{width:min(680px,100%);padding:clamp(28px,6vw,64px) clamp(20px,5vw,32px) clamp(48px,8vw,88px)}
+body.dark{background:var(--dusk);color:var(--ink-on-dusk)}
+body.paper{background:var(--paper);color:var(--ink)}
+body.wide main{width:min(760px,100%)}
+::selection{background:var(--amber-dim)}
+/* nav */
+nav{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:clamp(56px,10vw,96px)}
+nav .name{font-size:17px;text-decoration:none;color:inherit}
+nav .links{display:flex;gap:24px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
+.dark nav .links a{color:var(--faint-on-dusk);text-decoration:none}
+.dark nav .links a:hover,.dark nav .links a[aria-current]{color:var(--ink-on-dusk)}
+.paper nav .links a{color:var(--faint);text-decoration:none}
+.paper nav .links a:hover{color:var(--ink)}
+.paper nav .links a[aria-current]{color:var(--amber-paper)}
+/* type */
+h1{font-size:clamp(30px,5.5vw,40px);font-weight:400;line-height:1.24;margin:0 0 36px;max-width:600px}
+.dark h1{margin-bottom:44px;max-width:540px}
+.accent{color:var(--amber);font-style:italic}
+p{margin:0 0 24px;max-width:540px}
+.dark p{color:var(--muted-on-dusk)}
+.paper p{color:var(--body)}
+p:last-child{margin-bottom:0}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:0 0 14px}
+h2{font-family:var(--mono);font-size:15px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-paper);margin:0 0 16px}
+.lede{font-size:19.5px;line-height:1.6;color:var(--ink);margin-bottom:40px}
+.lede strong{font-weight:500}
+section{margin-bottom:40px}
+section:last-child{margin-bottom:0}
+ul{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:14px;max-width:540px;color:var(--body)}
+ul strong,.paper p strong{font-weight:500;color:var(--ink)}
+/* links in text */
+.dark a{color:var(--amber)}
+.paper a{color:var(--amber-paper)}
+p a,li a{text-decoration:none;border-bottom:1px solid var(--amber-paper-dim)}
+.dark p a{border-bottom-color:var(--amber-dim)}
+p a:hover,li a:hover{border-bottom-color:currentColor}
+em{font-style:italic}
+/* case-study margin notes */
+.with-aside{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}
+.with-aside>.main{flex:1 1 420px;min-width:0}
+aside{flex:1 1 170px;max-width:220px;border-left:1px solid var(--paper-line);padding-left:20px;
+  display:flex;flex-direction:column;gap:24px;font-style:italic;color:var(--faint-italic);font-size:14px;line-height:1.55}
+aside .label{font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-paper);margin:0 0 4px}
+aside p{margin:0;color:inherit}
+/* footer */
+footer{border-top:1px solid var(--paper-line);margin-top:64px;padding-top:26px;
+  display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.dark footer{border-top-color:var(--dusk-line)}
+footer .bio{font-size:15.5px;font-style:italic;max-width:400px;margin:0;color:var(--faint-italic)}
+.dark footer .bio{color:var(--faint-on-dusk)}
+footer .email{font-family:var(--mono);font-size:12px;text-decoration:none;border:none;color:var(--faint)}
+.dark footer .email{color:var(--muted-on-dusk)}
+footer .email:hover{color:var(--amber-paper)}
+.dark footer .email:hover{color:var(--amber)}
+footer a.bio{text-decoration:none}
+footer a.bio:hover{color:var(--ink)}
