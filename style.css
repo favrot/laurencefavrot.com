@@ -40,8 +40,9 @@ h2{font-family:var(--mono);font-size:15px;font-weight:500;letter-spacing:.08em;t
 .lede strong{font-weight:500}
 section{margin-bottom:40px}
 section:last-child{margin-bottom:0}
-ul{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:14px;max-width:540px;color:var(--body)}
-ul strong,.paper p strong{font-weight:500;color:var(--ink)}
+ul,ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:14px;max-width:540px;color:var(--body)}
+ol{margin-bottom:24px}
+ul strong,ol strong,.paper p strong{font-weight:500;color:var(--ink)}
 /* links in text */
 .dark a{color:var(--amber)}
 .paper a{color:var(--amber-paper)}
