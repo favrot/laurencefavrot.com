@@ -63,6 +63,9 @@ aside{flex:1 1 170px;max-width:220px;border-left:1px solid var(--paper-line);pad
   display:flex;flex-direction:column;gap:24px;font-style:italic;color:var(--faint-italic);font-size:14px;line-height:1.55}
 aside .label{font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-paper);margin:0 0 4px}
 aside p{margin:0;color:inherit}
+/* essay margin notes (float into right gutter; text column stays 540px) */
+.note{float:right;clear:right;width:180px;margin:4px -54px 28px 30px;border-left:none;padding-left:0}
+@media(max-width:840px){.note{float:none;width:auto;max-width:540px;margin:0 0 24px}}
 /* footer */
 footer{border-top:1px solid var(--paper-line);margin-top:64px;padding-top:26px;
   display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
