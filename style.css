@@ -78,3 +78,25 @@ footer .email:hover{color:var(--amber-paper)}
 .dark footer .email:hover{color:var(--amber)}
 footer a.bio{text-decoration:none}
 footer a.bio:hover{color:var(--ink)}
+
+/* nutshells: piece dek, writing-list rows, map page (added 8/20) */
+.dek{font-style:italic;color:var(--faint-italic);margin:0 0 36px;font-size:18px;max-width:560px}
+.maplink{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 34px}
+.maplink a{color:var(--amber-paper);text-decoration:none}
+.maplink a:hover{color:var(--ink)}
+.wrow{margin:0 0 26px}
+.wrow p{margin:0}
+.wrow .wt a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--amber-paper-dim)}
+.wrow .wt a:hover{color:var(--amber-paper)}
+.wrow .wd{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--faint);text-transform:uppercase;margin-left:10px}
+.wrow .wn{font-style:italic;color:var(--faint-italic);font-size:15.5px;max-width:540px;margin-top:2px}
+.spine{font-size:19px;color:var(--ink);max-width:600px;margin-bottom:44px}
+.node{border:1px solid var(--paper-line);background:#fcf8ee;padding:15px 20px 13px;margin:0 0 12px;max-width:640px}
+.node p{max-width:none}
+.node .nt{font-size:19px;color:var(--ink);margin:0 0 4px}
+.node .nt a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--amber-paper-dim)}
+.node .nt a:hover{color:var(--amber-paper)}
+.node .nd{font-size:16px;line-height:1.55;color:var(--body);margin:0 0 8px}
+.node .ne{font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--faint);text-transform:uppercase;margin:0}
+.chip{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--paper-line);color:var(--faint);padding:1.5px 7px;vertical-align:3px;margin-left:6px;white-space:nowrap}
+.chip.shipped,.chip.inedit{border-color:var(--amber-paper-dim);color:var(--amber-paper)}

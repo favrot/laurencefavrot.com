@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fitness advisor: a case study · Laurence Favrot</title>
+<meta name="description" content="A deep dive into the personal training advisor I built: how it works, the principles behind it, and specific illustrations of it working.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+.artifact{border:1px solid var(--paper-line);background:#fcf8ee;padding:20px 24px;margin:32px 0;max-width:600px}
+.artifact .src{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:0 0 16px;display:flex;justify-content:space-between;gap:12px}
+.artifact .src .date{color:var(--amber-paper);white-space:nowrap}
+.msg{margin:0 0 16px}
+.msg:last-child{margin-bottom:0}
+.msg .who{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 4px;color:var(--faint)}
+.msg.advisor .who{color:var(--amber-paper)}
+.msg p{font-size:16px;line-height:1.55;margin:0 0 10px;max-width:none;color:var(--ink)}
+.msg.advisor p{color:var(--body)}
+.msg .cut{color:var(--faint);font-style:italic}
+.stage{font-style:italic;color:var(--faint-italic);font-size:14px;margin:0 0 16px}
+.filecard{font-family:var(--mono);font-size:12px;line-height:1.6;white-space:pre-wrap;color:var(--body);margin:0}
+.fn{font-family:var(--mono);font-size:11px;color:var(--amber-paper);vertical-align:super;line-height:0}
+.gridcard{font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--body);margin:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.filecard .fm{color:var(--faint)}
+.filecard .del{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--paper-line)}
+.filecard .add{background:rgba(176,122,52,.10);color:var(--ink)}
+.filecard .meta{color:var(--faint)}
+.filecard strong{color:var(--ink)}
+details.unfold{margin-top:4px}
+details.unfold summary{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-paper);cursor:pointer;list-style:none;padding:8px 0 2px;border-top:1px solid var(--paper-line)}
+details.unfold summary::before{content:"▸ "}
+details.unfold[open] summary::before{content:"▾ "}
+details.unfold summary::-webkit-details-marker{display:none}
+details.unfold[open] summary{margin-bottom:14px}
+figure{margin:32px 0;max-width:696px}
+figure img{width:100%;border:1px solid var(--paper-line);display:block}
+figure.narrow{max-width:480px}
+figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:10px}
+.diagram{margin:32px 0;max-width:640px}
+.diagram svg{width:100%;height:auto;display:block}
+</style>
+</head>
+<body class="paper wide">
+<main>
+<nav>
+<a class="name" href="../index.html">Laurence Favrot</a>
+<div class="links">
+<a href="../now.html">Now</a>
+<a href="../work/trust-document-automation.html">Work</a>
+<a href="../writing.html" aria-current="page">Writing</a>
+</div>
+</nav>
+<p class="kicker">Case study · Summer 2026</p>
+<h1>Fitness advisor: a case study</h1>
+<p class="subtitle" style="font-style:italic;color:var(--faint-italic,#a3987f);margin:-24px 0 36px;font-size:18px">A personal training system that fits into my life: how it works, and how it was built.</p>
+
+<h2>The problem</h2>
+<p>I wanted a humane, evidence-based fitness program that was deeply integrated into my life. My schedule changes constantly. I'm nursing four minor injuries. I keep learning things I want my training to absorb. And the core problem: I'm down to 30 minutes today to exercise. How do I best spend those 30 minutes? What's the highest-impact activity for me, against all of my goals, constraints, and everything I've done over the past few weeks? Answering that question on the fly is hard.</p>
+<p>An online program leaves the adapting to you. A personal trainer only sees a slice of your week. They can't re-plan around your Tuesday meeting schedule. Managing the programming yourself is a massive manual effort, and the people who need this don't have the time. What actually happens is that we don't follow a program at all. Our "program" is mostly whatever we feel like, or whatever happens to happen, and our results reflect that.</p>
+<p>I'm not at my best every day. I might not have slept well. I'm a human. Some days I want more time with my kids. Some days the surf is good and the existing plan goes out the window. All of that has to be input to the system, not deviation from it.</p>
+<p>So I built an advisor that answers the question. I'm using fitness as the subject of this case study because it's a domain people broadly understand, and it's big enough to go both broad and deep. It extends into sleep, stress, energy management, nutrition, sport-specific skill, mindset, and more. The principles here each deserve their own deeper write-ups, and those are coming. This piece shows the principles in practice.</p>
+
+<h2>What it is</h2>
+<p>A personal training advisor that reasons from an auditable knowledge base. It's not an app. It's primarily a git repository: a folder of plain-text files with a complete change history. Claude operates on top of these files as an advisor, with conversation as the primary interface.</p>
+
+<p>In practice I rarely type. Session logs, complaints, and questions all get spoken out loud, reducing the burden of input below the threshold of annoyance. It answers in conversation, on the calendar, and in its own files, and it works alongside the other advisor systems I run.</p>
+
+<div class="diagram">
+<svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace">
+  <g font-size="10.5" fill="#453e35">
+    <g stroke="#c9bfa8" fill="#fcf8ee">
+      <rect x="8" y="10" width="170" height="34" rx="2"/>
+      <rect x="8" y="58" width="170" height="34" rx="2"/>
+      <rect x="8" y="106" width="170" height="34" rx="2"/>
+      <rect x="8" y="154" width="170" height="34" rx="2"/>
+      <rect x="8" y="202" width="170" height="34" rx="2"/>
+      <rect x="8" y="250" width="170" height="34" rx="2"/>
+    </g>
+    <text x="22" y="31">GOALS &amp; ANTI-GOALS</text>
+    <text x="22" y="79">KNOWLEDGE BASE (CLAIMS)</text>
+    <text x="22" y="127">TRAINING LOG</text>
+    <text x="22" y="175">INJURY CASES</text>
+    <text x="22" y="223">SLEEP &amp; READINESS (RING)</text>
+    <text x="22" y="271">THE REAL CALENDAR</text>
+  </g>
+  <g stroke="#a3987f" fill="none" stroke-width="1.1">
+    <path d="M178 27 C 250 27, 260 120, 318 141"/>
+    <path d="M178 75 C 245 75, 258 128, 318 147"/>
+    <path d="M178 123 C 240 123, 258 140, 318 153"/>
+    <path d="M178 171 C 240 171, 258 166, 318 159"/>
+    <path d="M178 219 C 245 219, 258 178, 318 165"/>
+    <path d="M178 267 C 250 267, 260 186, 318 171"/>
+  </g>
+  <rect x="320" y="126" width="128" height="60" rx="2" fill="#fcf8ee" stroke="#b07a34" stroke-width="1.4"/>
+  <text x="345" y="152" font-size="11" fill="#2b2620">THE ADVISOR</text>
+  <text x="337" y="170" font-size="9.5" fill="#8c8069">judgment + scripts</text>
+  <path d="M448 156 L 496 156" stroke="#b07a34" stroke-width="1.4" fill="none"/>
+  <path d="M496 156 l -7 -4 v 8 z" fill="#b07a34"/>
+  <rect x="498" y="126" width="134" height="60" rx="2" fill="#fcf8ee" stroke="#c9bfa8"/>
+  <text x="512" y="150" font-size="10.5" fill="#2b2620">ONE RECOMMENDATION</text>
+  <text x="512" y="168" font-size="9.5" fill="#8c8069">today: this, because…</text>
+</svg>
+</div>
+
+<p>The knowledge lives in a chain: sources → claims → <em>modality dossiers</em> (one working file per kind of training) → my plan → the live week → dated sessions. A <em>claim</em> is a sourced, versioned assertion, marked with how solid the evidence actually is, like "~10–12 hard sets per muscle group per week is the primary programming lever." Take a number from any session and you can walk it backward through the plan, through a claim, to a source. The architecture supported multiple people from the start. The vetted knowledge is shared, and everything personal stays in each person's separate files. So far the only user is me.</p>
+
+<div class="diagram">
+<svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace">
+  <g font-size="9.5" fill="#2b2620">
+    <g stroke="#c9bfa8" fill="#fcf8ee">
+      <rect x="4" y="30" width="86" height="30" rx="2"/>
+      <rect x="112" y="30" width="86" height="30" rx="2"/>
+      <rect x="220" y="30" width="86" height="30" rx="2"/>
+      <rect x="328" y="30" width="86" height="30" rx="2"/>
+      <rect x="436" y="30" width="86" height="30" rx="2"/>
+      <rect x="544" y="30" width="86" height="30" rx="2"/>
+    </g>
+    <text x="18" y="48">SOURCES</text>
+    <text x="124" y="48">CLAIMS r#</text>
+    <text x="230" y="48">DOSSIERS</text>
+    <text x="350" y="48">PLAN</text>
+    <text x="446" y="48">LIVE WEEK</text>
+    <text x="556" y="48">SESSIONS</text>
+    <g stroke="#a3987f" stroke-width="1.1">
+      <path d="M90 45 L 112 45"/><path d="M198 45 L 220 45"/><path d="M306 45 L 328 45"/><path d="M414 45 L 436 45"/><path d="M522 45 L 544 45"/>
+    </g>
+  </g>
+  <path d="M600 78 L 40 78" stroke="#b07a34" stroke-width="1" fill="none"/>
+  <path d="M40 78 l 7 -4 v 8 z" fill="#b07a34"/>
+  <text x="150" y="94" font-size="9.5" fill="#b07a34" font-style="italic">walk back: why is this number in my workout?</text>
+  <path d="M40 108 L 600 108" stroke="#a3987f" stroke-width="1" fill="none"/>
+  <path d="M600 108 l -7 -4 v 8 z" fill="#a3987f"/>
+  <text x="150" y="124" font-size="9.5" fill="#8f887a" font-style="italic">walk forward: what does a revised claim touch?</text>
+</svg>
+</div>
+
+<div class="artifact">
+<p class="src"><span>knowledge/claims/C001-strength-weekly-volume.md</span><span class="date">verbatim</span></p>
+<pre class="filecard"><span class="fm">---
+id: C001
+rev: 1
+statement: "~10–12 hard sets per muscle group per week is the primary
+  programming lever for strength/hypertrophy in trained adults; adjust
+  up or down on recovery and progress."
+modalities: [strength]
+depth: vetted
+status: active
+sources: [luks-2025-muscle-consensus, rt-volume-dose-response]
+revised: 2026-06-15
+---</span>
+The consensus headline. For a broad GPP goal (not bodybuilding), count by
+movement pattern (squat, hinge, press, pull, carry) rather than per-muscle
+bookkeeping.</pre>
+<details class="unfold">
+<summary>show the deep vetting pass</summary>
+<pre class="filecard"><strong>Deep pass (2026-06-15):</strong> Confirmed; rev held at r1. Meta-regression evidence
+(Schoenfeld 2017; Pelland 2024/2026): hypertrophy follows a graded
+dose-response in weekly sets, with diminishing returns and no sharp plateau
+in the studied range; strength is much less volume-sensitive than size.</pre>
+</details>
+</div>
+
+<p>Day to day it runs on conversation. "Surfed two hours" is a complete entry: it goes in the training log, counts toward the week's targets, and shapes the next recommendation. A weekly review runs on its own schedule: it syncs the wearables, checks the structure's integrity, computes what's owed against my targets, surfaces expired injury reviews, and drafts next week against my actual calendar. Sessions land on the calendar spelled out in plain language.</p>
+
+<figure>
+<a href="calweek-full-redacted.png" target="_blank"><img src="calweek-full-redacted.png" alt="A real week on the calendar, no event open; only the programmed training sessions are legible, the rest of life is blurred."></a>
+<figcaption>A real week. The only legible events are the system's. (Tap to enlarge.)</figcaption>
+</figure>
+
+<figure class="narrow">
+<a href="calendar-event-card.png" target="_blank"><img src="calendar-event-card.png" alt="A calendar event opened: the full Monday session, spelled out in plain language with reasoning."></a>
+<figcaption>Monday's session, opened: plain language, decision rules included. (Tap to enlarge.)</figcaption>
+</figure>
+
+<p>The calendar shows the intended week, and ideally you follow it. But when life diverges (a meeting lands on a session, sleep goes bad, the waves turn good), the system credits whatever actually happened and rebuilds the rest.</p>
+
+<h2>How a week runs: modalities, targets, debt</h2>
+<p>Everything trainable lives in a registry of modalities: strength, power, VO2max, aerobic base, tendon, mobility, and movement. Activities, like surfing, lifting, hiking, skating, or walking, give <em>credit</em> against one or more modalities. My plan gives each modality a weekly <em>target</em> and a <em>floor</em>. The floor is the minimum acceptable dose. The target is the full intended dose. The log credits doses against those targets, so two hours of surf is credited against aerobic base. <em>Debt</em> is how far behind each modality is, and it's computed by a script, not vibes. So when I ask what to do with my next available 30 minutes, the answer is whatever pays down the highest debt and fits my current constraints.</p>
+
+<div class="diagram">
+<svg viewBox="0 0 640 258" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace">
+  <g font-size="10" fill="#453e35">
+    <g stroke="#c9bfa8" fill="#fcf8ee">
+      <rect x="8" y="30" width="172" height="30" rx="2"/>
+      <rect x="8" y="104" width="172" height="30" rx="2"/>
+      <rect x="8" y="178" width="172" height="30" rx="2"/>
+    </g>
+    <text x="24" y="49">SURF (~2H)</text>
+    <text x="24" y="123">STRENGTH A + ROPE</text>
+    <text x="24" y="197">WALK</text>
+    <g stroke="#c9bfa8" fill="#fcf8ee">
+      <rect x="470" y="8" width="162" height="26" rx="2"/>
+      <rect x="470" y="42" width="162" height="26" rx="2"/>
+      <rect x="470" y="76" width="162" height="26" rx="2"/>
+      <rect x="470" y="110" width="162" height="26" rx="2"/>
+      <rect x="470" y="144" width="162" height="26" rx="2"/>
+      <rect x="470" y="178" width="162" height="26" rx="2"/>
+      <rect x="470" y="212" width="162" height="26" rx="2"/>
+    </g>
+    <g font-size="9.5">
+      <text x="484" y="25">STRENGTH</text>
+      <text x="484" y="59">POWER</text>
+      <text x="484" y="93">VO2MAX</text>
+      <text x="484" y="127">AEROBIC BASE</text>
+      <text x="484" y="161">TENDON</text>
+      <text x="484" y="195">MOBILITY</text>
+      <text x="484" y="229">MOVEMENT</text>
+    </g>
+  </g>
+  <g stroke="#b07a34" fill="none" stroke-width="1.4">
+    <path d="M180 45 C 320 45, 340 123, 470 123"/>
+  </g>
+  <g stroke="#b07a34" fill="none" stroke-width="0.8" stroke-dasharray="3 3">
+    <path d="M180 41 C 320 41, 340 55, 470 55"/>
+    <path d="M180 49 C 320 49, 340 191, 470 191"/>
+  </g>
+  <g stroke="#a3987f" fill="none" stroke-width="1.4">
+    <path d="M180 115 C 320 115, 340 21, 470 21"/>
+    <path d="M180 123 C 320 123, 340 157, 470 157"/>
+  </g>
+  <g stroke="#a3987f" fill="none" stroke-width="0.8" stroke-dasharray="3 3">
+    <path d="M180 193 C 320 193, 350 131, 470 131"/>
+  </g>
+  <text x="200" y="18" font-size="9.5" fill="#8f887a" font-style="italic">one activity credits several modalities</text>
+  <text x="8" y="250" font-size="9" fill="#8f887a" font-style="italic">solid = full credit &#183; dashed = partial &#183; one week's example, computed per session, not a fixed map</text>
+</svg>
+</div>
+
+<div class="artifact">
+<p class="src"><span>people/laurence/plan/current-week.md · the weekly review</span><span class="date">Aug 17, 2026</span></p>
+<pre class="filecard"><strong>Last week was a good week with exactly one hole in it, and the
+hole is VO2max.</strong> Measured properly (Mon Aug 10 → Sun Aug 16):
+strength <strong>2/2</strong> · power <strong>2/2</strong> · tendon <strong>4/5</strong> · mobility <strong>3/5</strong> ·
+aerobic base <strong>293/210</strong> · movement <strong>1/1</strong> — and <strong>vo2max 0/1, the
+only breach.</strong> Nothing else came near a floor. Priority #1 in
+your own weighting is the aerobic engine, and the base is
+thriving; it's the ceiling work that's missing.</pre>
+</div>
+
+<div class="artifact">
+<p class="src"><span>people/laurence/progress.md · generated by scripts/progress.py</span><span class="date">Aug 16, 2026</span></p>
+<pre class="gridcard">modality       06/22  06/29  07/06  07/13  07/20  07/27  08/03  08/10   streak
+strength         ■      ■      ■      ■      ·      ■      ■      ■       3w
+power            ·      ◪      ■      ·      ◪      ◪      ■      ■       4w
+vo2max           ■      ■      ■      ■      ■      ■      ■      ·       0w
+aerobic-base     ·      ·      ·      ◪      ◪      ◪      ·      ■       1w
+tendon           ·      ·      ■      ■      ◪      ◪      ■      ◪       6w
+mobility         ·      ·      ■      ◪      ◪      ◪      ■      ◪       6w
+movement         ◪      ◪      ◪      ◪      ◪      ◪      ■      ■       8w
+
+■ hit target   ◪ met floor   · below floor</pre>
+</div>
+
+<p>The measurement is also accountability. It's easy to delude yourself into thinking you're doing more than you are. The credited week says what actually happened.</p>
+
+<h2>The care model: cases, gates, standards</h2>
+<p>Anything that goes wrong, like an injury or limitation, becomes a <em>case</em> with a severity and a review-by date. A case expires unless evidence renews it, which is how the system avoids overcaution. Coming back from an injury is a ladder of tested rungs (again, based on evidence). Above all of it sit personalized capability standards and a quarterly test. Progress means meeting or exceeding standards, and a regression becomes a named priority among the other goals.</p>
+
+<div class="artifact">
+<p class="src"><span>people/laurence/plan/current-week.md · watch items</span><span class="date">Aug 17, 2026</span></p>
+<pre class="filecard">🟢 <strong>Right shoulder</strong> — MONITORING as of 8/17. Both provocateur loops
+   closed. Close criterion: one paddle-heavy surf (~75–90min) clean.
+   Review 9/14. → cases/right-shoulder.md
+🟢 <strong>Left Achilles</strong> — rung advanced 8/17: rope goes to 3×20s. Even
+   weight, stop on favoring, ≤3/10, next-morning rule. Review 9/7.
+✅ <strong>Medial knee — CLOSED 8/2.</strong> Bulgarians unrestricted.
+🟢 <strong>Left hip/SI</strong> — downgraded 8/10, "has actually been great."
+   Warm-up clears the morning pop. Review 9/14.
+🟡 <strong>Sleep/recovery</strong> — held 8/10, no restriction. Review 9/7.
+🟡 <strong>Both forearms</strong> — NEW 8/17, low-grade. <span class="cut">[…]</span> No movement
+   restriction — crawling stays, titrated ≤3/10. Re-read 8/23.</pre>
+</div>
+
+<h2>There is no optimal, only optimal-for-me, right now</h2>
+<p>This system is built to fit me specifically. My goals: longevity, feeling good, capacity at 80, and aesthetics. Yours might be a marathon or handling a pre-diabetes diagnosis. The system encodes those goals and optimizes against them, because there is no optimal program in the abstract. There's what's optimal for you, right now. The anti-goals are encoded too. The one that outranks everything else for me is avoiding injury. And when a week can't hold everything, a priority order I've set in advance decides what wins.</p>
+<aside class="note"><div><p class="label">* causality</p><p>How causal the VO2max–longevity link is gets argued; nothing here rests on the strong version.</p></div></aside>
+<p>For example, VO2max is one of the strongest markers correlated with longevity<span class="fn">*</span>, so it earns its place in the program as part of the aerobic modality. The study we landed on says two hard sessions a week is the technically optimal dose. I do one. The second would cost a slot I need for other modalities that matter more across my goals, and it would add a high-stress session to a week that doesn't have room for more stress. You could build a "perfect" exercise week that leaves you without enough energy to hit your bar for being a good parent/partner/coworker. That tradeoff is unacceptable. The result is one quality VO2max session a week to hold the ceiling and easy aerobic volume to grow the engine underneath. While technically suboptimal, it's optimal for me. Because we're tracking the goal, the system surfaces when progress stalls. Optimal is a moving target.</p>
+
+<h2>The system carries the cognitive load</h2>
+<p>Running a program well means integrating a lot at once: everything you've done recently, what ideal programming says, your calendar, any injuries, today's energy, how you slept, the set math and progressive overload rules, how fast to advance which kind of loading. Past a few components it's unrealistic to manage the optimization yourself. This is why most of us base our workouts on a few crude heuristics. All of that load lives in the system now. It knows if I'm tired, because my Oura ring (a sleep and recovery tracker) is synced. It won't stack high-stress work onto a bad night. Sleep debt outranks training debt.</p>
+
+<div class="artifact">
+<p class="src"><span>from the advisor session log</span><span class="date">Aug 14, 2026</span></p>
+<div class="msg"><p class="who">Laurence</p>
+<p><span class="cut">[…]</span> I feel pretty terrible today. I didn't sleep well last night. I'm not feeling the 4x4. I might just stick with some rehab and light movement, maybe a walk with my wife after lunch <span class="cut">[…]</span> I don't think it makes sense to push.</p></div>
+<div class="msg advisor"><p class="who">Advisor</p>
+<p>Your own rule is in force here — sleep debt outranks training debt, and "not feeling it" before a hard session is precisely what the swap exists for. Not pushing is the right call, full stop. Let me pull last night's data and adjust the day:</p></div>
+<p class="stage">(Oura sync: 5.55 hours, readiness 63. The advisor rewrote the calendar event, then continued:)</p>
+<div class="msg advisor"><p class="who">Advisor</p>
+<p>Everything's adjusted — the calendar event now says what today actually is, and the swap is logged as the rule working, not a miss.</p></div>
+</div>
+
+<h2>It compounds</h2>
+<p>The knowledge base doesn't assume completeness or a fixed structure. This allowed it to start rough and function right away, while getting vetted over time. For example, the "twice a day" tendon dosing from the research turned out to rest on lab-grown tissue rather than human tendons. The claim was revised, and the revision propagated automatically through every dossier, plan, and session built on top. Any interesting new data or bro science is easy enough to throw into the mix for research and consideration as a claim. Intake is fast, so if something better than my current protocol appears tomorrow, I can integrate it immediately. The system isn't yet self-improving, but an automated research loop could keep it up to date.</p>
+
+<div class="artifact">
+<p class="src"><span>git show eb4f4f5 · knowledge/claims/C016-tendon-microdosing.md</span><span class="date">Jun 15, 2026</span></p>
+<pre class="filecard"><span class="meta">research(deep): vet Tier A — injury/connective-tissue claims
+C016 REVISED r1->r2: dropped in-vitro 6h/2x-day basis; near-daily
+once-daily micro-dosing (human collagen synthesis elevated 24-72h)
+Co-Authored-By: Claude Opus 4.8</span>
+
+<span class="del">-rev: 1</span>
+<span class="add">+rev: 2</span>
+<span class="del">-statement: "Connective-tissue loading saturates in short bouts (~10min)
+-  and recharges after ~6h, so frequent micro-doses (near-daily, even
+-  2×/day) beat rare long sessions for tendon adaptation."</span>
+<span class="add">+statement: "Tendon collagen synthesis saturates within a short loading
++  bout (~10min) and stays elevated ~24–72h afterward, so short doses on
++  most days are what matter — frequency beyond once-daily adds little
++  proven benefit in human tendon."</span>
+<span class="del">-depth: fast-pass</span>
+<span class="add">+depth: vetted</span>
+
+<span class="meta">42 minutes later — the propagation commit (5b60f41):
+8 files changed · strength + tendon dossiers, ideal-week, personal-plan,
+deviations, PENDING, README, BACKLOG — every citation bumped [C016.r1]→[C016.r2]</span></pre>
+</div>
+
+<h2>Elite attention, made ordinary</h2>
+<p>This level of integrated attention has always existed for people who can afford a team. Think of professional athletes or executives at the largest companies. You can also make an equivalent case around food. You can cook well for yourself at home, but a chef who knows your goal calories, macros, and your tastes delivers more than is feasible for the majority of people. I saw the same shape at BetterUp, where coaching was primarily targeted at the executive level and the work was pushing it further down the org chart. This system is that attention pattern, running for one ordinary, busy person. To be clear, it isn't free or even that cheap. The AI tooling costs real money. But that cost keeps falling.</p>
+
+<h2>It gets to the bottom of things</h2>
+<p>I've written about <a href="what-are-you-actually-solving.html">step zero</a>: confirming what the problem actually is before working on it. This system runs step zero constantly, on me. When something goes wrong, the plan doesn't bolt on a fix. Sometimes the whole structure rebuilds around solving the one thing. When I felt like my left ankle was losing range of motion due to rehab exercises, the answer was a two-minute measurement, which invalidated the hypothesis. The left had a centimeter more range than the right. The honesty machinery is the same accountability a good trainer provides. You think it's one thing, it might be another, and the back-and-forth loop keeps you honest.</p>
+
+<div class="artifact">
+<p class="src"><span>from the advisor session log</span><span class="date">Aug 7–8, 2026</span></p>
+<div class="msg"><p class="who">Laurence</p>
+<p><span class="cut">[…]</span> is it possible I'm losing range of motion in my left ankle? It feels like when I get into a squat, like to brush my teeth, it doesn't feel quite the same. <span class="cut">[…]</span></p></div>
+<div class="msg advisor"><p class="who">Advisor</p>
+<p>Your observation is plausible and has a clean mechanism: deep-loaded dorsiflexion has been <em>deliberately restricted</em> since mid-June, and weeks of heavy-slow calf loading stiffen the complex. But felt-sense in a daily squat is a hypothesis, not a measurement, so here's the test — <strong>knee-to-wall, tonight or tomorrow</strong> <span class="cut">[…]</span> Two minutes, and it converts "doesn't feel quite the same" into a number.</p></div>
+<div class="msg"><p class="who">Laurence · next day</p>
+<p>And in a weird twist of events, when I measured, it looks like there's about a centimeter more flexibility in my left ankle than my right ankle, which is not what I expected.</p></div>
+<div class="msg advisor"><p class="who">Advisor</p>
+<p>Both logged — and the twist is my favorite kind of result, because the measurement just did exactly what it exists to do: <strong>kill a plausible-sounding hypothesis before it became a program.</strong> If we'd gone on feel, you'd now have ankle-mobility homework for a deficit that doesn't exist. <span class="cut">[…]</span></p></div>
+</div>
+
+<h2>On my side</h2>
+<aside class="note"><div><p class="label">† malleable software</p><p>I'm inspired by <a href="https://www.geoffreylitt.com/">Geoffrey Litt's</a> work on malleable software.</p></div></aside>
+<p>The whole system is plain files in a repository I own. Data flows in from devices and services. Everything it knows about me lives there, easily readable and portable. Nothing about me is trapped in anyone's platform. No engagement metrics, no one else's incentives anywhere in the loop. That alignment changes the time horizon of the programming. Most programs and trainers operate on a short clock, but a system that's only accountable to you can think in decades. Some problems get solved differently on a longer horizon. On a longevity horizon, rushing the comeback from an injury to save three weeks is a bad trade. And when something doesn't fit, I change it along the dimensions I care about. Most software hardens around you and you live inside its limits.<span class="fn">†</span> A system this integrated into your life has to reshape itself as your circumstances change.</p>
+
+<h2>It knows what it isn't. Mostly.</h2>
+<aside class="note"><div><p class="label">‡ the jagged frontier</p><p>AI capability is famously uneven: superhuman at some tasks, clumsy at neighboring ones. <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4573321">"Navigating the Jagged Technological Frontier"</a> named the shape.</p></div></aside>
+<p>Would a trainer be better? Better at what? The honest comparison is jagged<span class="fn">‡</span>. This system is better than anything I could buy in some ways and clearly short of a great in-person trainer in others. I've also noticed I'm less guarded given the lack of social pressure that comes from a human coach. The downside is, of course, that I also don't benefit from the deeper motivation of not wanting to let someone down. The advisor can't (yet) watch your squat, put hands on your shoulder, or teach a beginner the movements. This isn't a teaching tool, and it wouldn't work for someone starting from zero. For a beginner it would start working only after a few sessions with a professional to learn the movements, mental models, and vocabulary. They would also need to learn how to interact with the system itself. What it does well is route to humans at its edges. When my shoulder recovery plateaued, I needed to find an actual physical therapist and bring back a program we could integrate. The job is managing what it doesn't know, what I don't know, or what's simply missing. Honestly, though, it only partly knows its own limits today.</p>
+
+<div class="artifact">
+<p class="src"><span>from the advisor session log · sleep case</span><span class="date">Jul 23, 2026</span></p>
+<div class="msg advisor"><p class="who">Advisor</p>
+<p><span class="cut">[…]</span> <strong>So here's the line I've written into the case, and I want you to know it's there:</strong> if the rough days persist past the deadline and the weekend — into early next week — then my recommendation moves from "watching" to "active": a therapist who works the burnout side directly becomes part of the plan, the same way Hinge became part of the shoulder plan. Not because something is broken, but because that's the right specialist for this tissue. This system tracks and supports; it doesn't treat — and I'd rather say that clearly now than late.</p></div>
+</div>
+
+<h2>Both of us get smarter</h2>
+<p>The system explains what it's doing and why. It's how trust gets built, and it's how I learn. I push on it, and the pushing improves us both. For example, I asked why a Tuesday was programmed the way it was, and got back an audit of the rules and an interesting edge case. My confusion had caught something the plan missed. The system-level loop is that my questions make the system better and its explanations make me better.</p>
+
+<div class="artifact">
+<p class="src"><span>from the advisor session log</span><span class="date">Jul 28, 2026</span></p>
+<div class="msg"><p class="who">Laurence</p>
+<p><span class="cut">[…]</span> I still don't understand today: why would I do the 4x4? It's going to be taxing on my legs. Why would I do that and then do single-leg? Why would I do Bulgarian split squats? My legs were already taken care of yesterday <span class="cut">[…]</span> what's the basis for this kind of programming, and what are the rules that go into it? Are you following those rules?</p></div>
+<div class="msg advisor"><p class="who">Advisor</p>
+<p>The rules I program against, in order of hardness:</p>
+<p>1. <strong>≤4 high-stress days per week</strong> (systemic recovery cap — a hard rule in the knowledge base). This week has 2. ✓</p>
+<p>2. <strong>~48h before loading the same pattern heavily again.</strong> Heavy squats Monday → heavy squats Tuesday would violate this. But Tuesday's legs weren't that: the 4×4 is cardiovascular work at ~250W, and Bulgarians at 30s+vest are moderate single-leg work in a different pattern. Tissue-wise, Tuesday was legal.</p></div>
+<details class="unfold">
+<summary>show the rest of the exchange</summary>
+<div class="msg advisor"><p class="who">Advisor · continued</p>
+<p>3. <strong>Consecutive hard-ish days are a legitimate compression tool</strong> — not ideal, but standard practice when the calendar forces it. The trade I made: your Wed–Sat don't exist this week, so both remaining floors got packed into the last two available days, with four recovery days right behind them.</p>
+<p>So: was the plan within the rules? Yes. <strong>But here's where your instinct beat the plan, and I want to name it:</strong> the plan assumed Monday's session at 3:30pm — about 17 hours before Tuesday morning. When your day pushed the session to 7:45pm, that gap collapsed to ~12 hours, and the plan's premise quietly broke. The right move at that point was to downgrade Tuesday automatically — the system didn't, and you caught it by feel this morning. That's exactly the kind of adjustment I should make the standing rule, so I'm making it one: <strong>when a session slides more than ~3 hours later than planned, the next morning's session gets re-checked before you touch it.</strong></p></div>
+<div class="msg"><p class="who">Laurence</p>
+<p>Okay, and I definitely intend to do the 4x4 today, so you should throw that one back on. <span class="cut">[…]</span> I wasn't asking you to fully abandon the 4x4, particularly</p></div>
+<div class="msg advisor"><p class="who">Advisor</p>
+<p>Got it — my overcorrection, not yours. The 4×4 goes back in; the Bulgarians were the right thing to question and they stay optional-leaning-skip. Fixing both places:</p></div>
+</details>
+</div>
+
+<h2>How it was built</h2>
+<p>The first working version came to life in six days, and it has been in near-daily use since. Most of the design came from seeing what broke in daily use and fixing it as part of using the system.</p>
+
+<p>Input had to be effortless (via voiced conversation) or it wouldn't happen. Dose math and integrity checks run in plain scripts, and the model spends its judgment where needed. There's only one session longer than a minute, which is the scheduled weekly review.</p>
+
+<p>Memory was the first thing to break. At first, everything I told the system went into one growing pile of notes, and within weeks the advisor was reading stale notes next to fresh ones and treating both as true. Now every issue gets its own file that holds its whole story. My shoulder has one, and so does my Achilles. Day to day the advisor reads only a short summary of where things stand, and it opens the full file when that issue is in play. Once a month, whatever closed gets archived.</p>
+
+<p>The habit that paid off most was traceability. Writing down why every number exists felt like bookkeeping until the first claim revision, when the fix flowed to every file that depended on it.</p>
+
+<p>It primarily reads and writes to my calendar, but it also writes flags other systems can use. That handoff runs through a persistence layer I'll write about in a future piece.</p>
+
+<p>Two things surprised me. The obstacle wasn't intelligence, but access to my calendar, sleep, logs, and history. Extending the system to a second person showed me how enormous the distance is between a hand-in-glove system built around one person and an actual product. This chat-shaped interface works for a technical systems-thinker and is nothing like an app most people would use.</p>
+
+<h2>Why not just Claude or ChatGPT?</h2>
+<p>A raw model holds every training philosophy at once, and that's the problem. Someone still has to collapse all that possibility into one point of view that fits one person: the method, numbers, and trade-offs. The "harness" is that collapsed, opinionated point of view, so the approach never gets re-decided from vibes at 6am. This requires persistent state, knowledge that's vetted and versioned, arithmetic that's deterministic, a schedule that wakes itself, and a record of its own mistakes. The hard part is extracting experts' tacit rules into a structure the system can use. Where depth matters, you still go to real experts. The model is broad; expertise is narrow and deep, and pulling knowledge out of experts' heads is the same hard work it always was.</p>
+
+<h2>Current gaps</h2>
+<p>There's plenty the system doesn't do. It doesn't handle nutrition, and for some people diet is their single biggest lever. It isn't a health advisor either. It has no motivation layer, which may be someone's primary sticking point to following any fitness program. It can't track anything on its own during a session; I'd love a watch app or video feedback, but neither exists yet. I am its eyes and ears. It can only advise me well because I notice what's happening in my body, discern what matters, and effectively report it after the session. That's a skill, which not everyone has. Better input channels are a big part of where this goes next. The truth is the system is full of holes that I patch without noticing, just because of who I am. Your holes would be different, and a version for you would have to cover them.</p>
+
+<h2>What transfers</h2>
+<p>This happens to be a fitness system, but it's one part of a larger constellation of advisors that work together, and the recipe is domain-agnostic. You encode your goals and constraints as first-class objects, source your claims, separate judgment from arithmetic, wire it into your real life, let it run, and correct it when it's wrong. This is the first time I've been able to build a fitness program that knows my life and reacts appropriately to it. I know tomorrow will be what I intended it to be, and when it isn't, I adjust the system until it's right.</p>
+
+<footer>
+<a class="bio" href="../index.html">more at laurencefavrot.com</a>
+<a class="email" href="mailto:favrot@gmail.com">favrot@gmail.com</a>
+</footer>
+</main>
+<script data-goatcounter="https://laurencefavrot.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

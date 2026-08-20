@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The map · Laurence Favrot</title>
+<meta name="description" content="How the pieces on this site fit together: the argument, the layers, and the case studies, including the parts still to be written.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="paper">
+<main>
+<nav>
+<a class="name" href="index.html">Laurence Favrot</a>
+<div class="links">
+<a href="now.html">Now</a>
+<a href="work/trust-document-automation.html">Work</a>
+<a href="writing.html" aria-current="page">Writing</a>
+</div>
+</nav>
+<p class="kicker">The map</p>
+<h1 style="margin-bottom:16px">How the pieces fit together</h1>
+<p class="dek">You are the integrator of your own development. These essays and case studies work out what that means, and how to build systems that help you do the integrating. The finished pieces are linked. The rest are sketches and will change.</p>
+<div class="diagram" style="margin:40px 0 48px;max-width:640px">
+<svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace">
+  <!-- the stakes: dashed frame across the top -->
+  <rect x="8" y="8" width="624" height="54" rx="2" fill="none" stroke="#c9bfa8" stroke-dasharray="4 4"/>
+  <text x="24" y="30" font-size="10.5" fill="#453e35">THE STAKES</text>
+  <text x="24" y="47" font-size="9" fill="#8f887a" font-style="italic">what happens if only a few people can do this, or if the systems steer us</text>
+
+  <!-- problem space -->
+  <rect x="8" y="118" width="168" height="66" rx="2" fill="#fcf8ee" stroke="#c9bfa8"/>
+  <text x="24" y="143" font-size="10.5" fill="#2b2620">THE PROBLEM SPACE</text>
+  <text x="24" y="166" font-size="9" fill="#8f887a" font-style="italic">today's systems fall short</text>
+
+  <!-- what to build -->
+  <rect x="238" y="118" width="164" height="66" rx="2" fill="#fcf8ee" stroke="#c9bfa8"/>
+  <text x="254" y="143" font-size="10.5" fill="#2b2620">WHAT TO BUILD</text>
+  <text x="254" y="160" font-size="9" fill="#8f887a" font-style="italic">systems that carry</text>
+  <text x="254" y="173" font-size="9" fill="#8f887a" font-style="italic">knowledge and act on it</text>
+
+  <!-- human core -->
+  <rect x="464" y="118" width="168" height="66" rx="2" fill="#fcf8ee" stroke="#b07a34" stroke-width="1.4"/>
+  <text x="480" y="143" font-size="10.5" fill="#2b2620">THE HUMAN CORE</text>
+  <text x="480" y="160" font-size="9" fill="#8f887a" font-style="italic">your agency: what you</text>
+  <text x="480" y="173" font-size="9" fill="#8f887a" font-style="italic">intend, acted on</text>
+
+  <!-- case studies -->
+  <rect x="238" y="236" width="164" height="60" rx="2" fill="#fcf8ee" stroke="#c9bfa8"/>
+  <text x="254" y="261" font-size="10.5" fill="#2b2620">CASE STUDIES</text>
+  <text x="254" y="278" font-size="9" fill="#8f887a" font-style="italic">already built and running</text>
+
+  <!-- arrows -->
+  <g stroke="#a3987f" fill="none" stroke-width="1.1">
+    <path d="M176 151 L 232 151"/>
+    <path d="M402 151 L 458 151"/>
+    <path d="M320 236 L 320 190"/>
+    <path d="M320 62 L 320 112"/>
+  </g>
+  <path d="M232 151 l -7 -4 v 8 z" fill="#a3987f"/>
+  <path d="M458 151 l -7 -4 v 8 z" fill="#a3987f"/>
+  <path d="M320 190 l -4 7 h 8 z" fill="#a3987f"/>
+  <path d="M320 112 l -4 7 h 8 z" fill="#a3987f"/>
+  <text x="184" y="143" font-size="8.5" fill="#b07a34" font-style="italic">so</text>
+  <text x="408" y="143" font-size="8.5" fill="#b07a34" font-style="italic">for</text>
+  <text x="328" y="218" font-size="8.5" fill="#b07a34" font-style="italic">proof</text>
+  <text x="328" y="92" font-size="8.5" fill="#b07a34" font-style="italic">why it matters</text>
+</svg>
+</div>
+<h2>The problem space</h2>
+<div class="node"><p class="nt">You as integrator <span class="chip">sketch</span></p>
+<p class="nd">Nobody can learn or grow for you. Specialists like teachers, doctors, and managers generally work inside their own domains, and nothing they hand you arrives fitted to your life. Integration is your job, whether you wanted it or not. Ask anyone who has had to navigate the medical system through a real illness.</p>
+<p class="ne">connects → seeing the whole person · personal data sovereignty · agency</p></div>
+<div class="node"><p class="nt">Seeing the whole person <span class="chip">sketch</span></p>
+<p class="nd">If you set out to design the most effective possible support for a person's growth, it would obviously need to see the whole person rather than a narrow slice. That seems self-evident, but almost nothing we build works that way.</p>
+<p class="ne">connects → step zero · you as integrator</p></div>
+<div class="node"><p class="nt"><a href="writing/what-are-you-actually-solving.html">Step zero: What are you actually solving?</a> <span class="chip shipped">shipped</span></p>
+<p class="nd">Before solving anything, confirm what the problem actually is. We tend to skip that step, and it turns out to be the one that matters most.</p>
+<p class="ne">connects → you as integrator · encoding what works · agency</p></div>
+<div class="node"><p class="nt">Aligning the incentives of your development <span class="chip">sketch</span></p>
+<p class="nd">This is the principal-agent problem, applied to your development. When you're not the one paying, the system answers to whoever is, and what you were actually hoping for is nobody's job (e.g. why we have tutors and concierge doctors).</p>
+<p class="ne">connects → personal data sovereignty · when scaffolding becomes a cage</p></div>
+<div class="node"><p class="nt">Personal personal data sovereignty <span class="chip">sketch</span></p>
+<p class="nd">Integration runs on your data, which is now scattered across systems and providers. Prying these fragments back out is real work. Setting up and maintaining integrations is a technical challenge. You have to become part librarian and part data engineer.</p>
+<p class="ne">connects → you as integrator · inside the model, or outside it · personal EHR</p></div>
+<h2>What to build</h2>
+<div class="node"><p class="nt">Encoding what works <span class="chip">sketch</span></p>
+<p class="nd">Best practice often isn't practiced at all. A system can carry that knowledge for you, apply it every day, and keep it current as the evidence moves.</p>
+<p class="ne">connects → step zero · operationalizing knowledge · fitness advisor</p></div>
+<div class="node"><p class="nt">Operationalizing knowledge <span class="chip">sketch</span></p>
+<p class="nd">Reading about training isn't training. Knowledge changes outcomes only when it's built into an environment that acts, with state, schedules, and feedback of its own.</p>
+<p class="ne">connects → encoding what works · recursive self-improvement</p></div>
+<div class="node"><p class="nt">Recursive self-improvement <span class="chip">sketch</span></p>
+<p class="nd">You build a system, live inside it, and improve it as it improves you. This is a loop that compounds.</p>
+<p class="ne">connects → operationalizing knowledge · agency · becoming as gods</p></div>
+<div class="node"><p class="nt">Inside the model, or outside it? <span class="chip">sketch</span></p>
+<p class="nd">As the models get better, how much of these systems for human development moves inside them, and how much stays outside, in structure you own? How do we find the boundary?</p>
+<p class="ne">connects → personal data sovereignty · when scaffolding becomes a cage</p></div>
+<h2>The human core</h2>
+<div class="node"><p class="nt">Agency is not following a better script <span class="chip">sketch</span></p>
+<p class="nd">It's easy to feel agentic while climbing someone else's ladder with someone else's compass. Agency is knowing what you actually intend, then acting on it.</p>
+<p class="ne">connects → you as integrator · recursive self-improvement · when scaffolding becomes a cage</p></div>
+<h2>The stakes</h2>
+<div class="node"><p class="nt">When scaffolding becomes a cage <span class="chip">sketch</span></p>
+<p class="nd">A system powerful enough to guide you is powerful enough to steer you. The stronger these systems get, the more that difference matters.</p>
+<p class="ne">connects → aligning the incentives of your development · agency</p></div>
+<div class="node"><p class="nt">Becoming as gods, getting good at it <span class="chip">sketch</span></p>
+<p class="nd">The power arrives whether we're ready or not. A society where a few people direct the machines and everyone else takes direction from them doesn't work.</p>
+<p class="ne">connects → when scaffolding becomes a cage · recursive self-improvement</p></div>
+<div class="node"><p class="nt"><a href="writing/written-with-ai.html">With help from AI</a> <span class="chip shipped">shipped</span></p>
+<p class="nd">Every piece here starts as my own thinking, usually spoken out loud. AI helps gather material and assemble drafts, and I edit until I own every word. Judge the writing on whether the ideas stand.</p>
+<p class="ne">connects → recursive self-improvement · agency</p></div>
+<h2>Case studies</h2>
+<div class="node"><p class="nt"><a href="writing/fitness-advisor.html">Fitness advisor</a> <span class="chip shipped">shipped</span></p>
+<p class="nd">A personal training system that fits into my life: how it works, and how it was built.</p>
+<p class="ne">shows → encoding what works · operationalizing knowledge · personal data sovereignty</p></div>
+<div class="node"><p class="nt">Personal EHR <span class="chip">sketch</span></p>
+<p class="nd">One archive for every health record I have. The originals are preserved untouched forever, and everything I actually read is regenerated on top, so the archive improves as AI improves. There is almost no code, just files, procedures, and an agent to run them.</p>
+<p class="ne">shows → personal data sovereignty · operationalizing knowledge</p></div>
+<div class="node"><p class="nt">Surf advisor <span class="chip">sketch</span></p>
+<p class="nd">Given a door-to-door window, is surfing worth it, where should I go, and what should I bring? The evidence gets gathered deterministically and the judgment happens on top, fitted to my skill, my boards, and my access rather than to surfers in general. A surf day then credits the fitness advisor.</p>
+<p class="ne">shows → encoding what works · inside the model, or outside it</p></div>
+<div class="node"><p class="nt">The persistence layer <span class="chip">sketch</span></p>
+<p class="nd">The context layer under every system I run. It holds who I am, how I decide, and what's current, and any AI I open loads it and starts already knowing me. Every fact carries its provenance.</p>
+<p class="ne">shows → personal data sovereignty · inside the model, or outside it</p></div>
+<footer>
+<a class="bio" href="index.html">more at laurencefavrot.com</a>
+<a class="email" href="mailto:favrot@gmail.com">favrot@gmail.com</a>
+</footer>
+<script data-goatcounter="https://laurencefavrot.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</main>
+</body>
+</html>
