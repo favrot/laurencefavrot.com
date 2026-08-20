@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Laurence Favrot">
+  <rect width="64" height="64" rx="10" fill="#1e1c19"/>
+  <rect x="1" y="1" width="62" height="62" rx="9" fill="none" stroke="#35322c" stroke-width="2"/>
+  <text x="13" y="43" fill="#d9a05b" font-family="Georgia, 'Times New Roman', serif" font-size="31">L</text>
+  <text x="32" y="43" fill="#e8e2d6" font-family="Georgia, 'Times New Roman', serif" font-size="31">F</text>
+</svg>
