@@ -106,3 +106,10 @@ footer a.bio:hover{color:var(--ink)}
 @media(max-width:640px){.diagram svg{min-width:560px}}
 /* map: sketch cards recede slightly so shipped work anchors the page (8/21) */
 .node:not(:has(.chip.shipped)){opacity:.78}
+
+/* quiet invitation link in the dark footer (8/21) */
+.dark footer .bio a{color:var(--muted-on-dusk);text-decoration:none;border-bottom:1px solid var(--amber-dim)}
+.dark footer .bio a:hover{color:var(--ink-on-dusk)}
+
+/* multi-link rows wrap between links, never inside one (8/21) */
+.more a{white-space:nowrap}
