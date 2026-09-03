@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personal health record · Laurence Favrot</title>
+<meta name="description" content="I'm assembling my health history in one folder I own. What it can do today, and the much larger system I'm building on that foundation.">
+<meta property="og:title" content="Personal health record">
+<meta property="og:description" content="I'm assembling my health history in one folder I own. What it can do today, and the much larger system I'm building on that foundation.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://laurencefavrot.com/writing/personal-health-record.html">
+<meta property="og:site_name" content="Laurence Favrot">
+<meta property="og:image" content="https://laurencefavrot.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="Laurence Favrot — I'm building systems that consider the whole person.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://laurencefavrot.com/og-image.png">
+<meta name="twitter:image:alt" content="Laurence Favrot — I'm building systems that consider the whole person.">
+<link rel="canonical" href="https://laurencefavrot.com/writing/personal-health-record.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#1e1c19">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+.artifact{border:1px solid var(--paper-line);background:#fcf8ee;padding:20px 24px;margin:32px 0;max-width:600px}
+.artifact .src{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:0 0 16px;display:flex;justify-content:space-between;gap:12px}
+.artifact .src .date{color:var(--amber-paper);white-space:nowrap}
+.msg{margin:0 0 16px}
+.msg:last-child{margin-bottom:0}
+.msg .who{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 4px;color:var(--faint)}
+.msg.advisor .who{color:var(--amber-paper)}
+.msg p{font-size:16px;line-height:1.55;margin:0 0 10px;max-width:none;color:var(--ink)}
+.msg.advisor p{color:var(--body)}
+.msg .cut{color:var(--faint);font-style:italic}
+.stage{font-style:italic;color:var(--faint-italic);font-size:14px;margin:0 0 16px}
+.filecard{font-family:var(--mono);font-size:12px;line-height:1.6;white-space:pre-wrap;color:var(--body);margin:0}
+.filecard .fm{color:var(--faint)}
+.filecard .meta{color:var(--faint)}
+.filecard strong{color:var(--ink)}
+.gridcard{font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--body);margin:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gridcard strong{color:var(--ink)}
+.gridcard .on{color:var(--amber-paper)}
+.fn{font-family:var(--mono);font-size:11px;color:var(--amber-paper);vertical-align:super;line-height:0}
+details.unfold{margin-top:4px;margin-bottom:40px}
+details.unfold summary{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-paper);cursor:pointer;list-style:none;padding:8px 0 2px;border-top:1px solid var(--paper-line)}
+details.unfold summary::before{content:"\25B8\00a0"}
+details.unfold[open] summary::before{content:"\25BE\00a0"}
+details.unfold summary::-webkit-details-marker{display:none}
+details.unfold[open] summary{margin-bottom:14px}
+details.unfold p{font-size:16.5px;line-height:1.6}
+.diagram{margin:32px 0;max-width:640px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.diagram svg{width:100%;height:auto;display:block}
+.diagram figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:10px}
+@media(max-width:640px){.diagram svg{min-width:560px}}
+.draftnote{border:1px dashed var(--amber-paper-dim);padding:12px 16px;margin:0 0 40px;max-width:600px;font-family:var(--mono);font-size:11.5px;line-height:1.6;color:var(--faint)}
+.pan{position:relative}
+@media(max-width:640px){
+.artifact .src{flex-direction:column;gap:2px}
+.artifact .src span{white-space:normal}
+.pan::after{content:"";position:absolute;top:0;right:0;bottom:0;width:40px;background:linear-gradient(to right,rgba(247,242,231,0),var(--paper));pointer-events:none}
+.artifact .pan::after{background:linear-gradient(to right,rgba(252,248,238,0),#fcf8ee)}
+}
+figure.flagship{max-width:696px}
+@media(max-width:640px){figure.flagship svg{min-width:600px}}
+</style>
+</head>
+<body class="paper wide">
+<main>
+<nav>
+<a class="name" href="../index.html">Laurence Favrot</a>
+<div class="links">
+<a href="../now.html">Now</a>
+<a href="../work/">Work</a>
+<a href="../writing.html" aria-current="page">Writing</a>
+</div>
+</nav>
+
+<p class="kicker">Case study · September 2026</p>
+
+<h1 style="margin-bottom:12px">Personal health record</h1>
+
+<p class="dek">I'm assembling my health history in one folder I own. What it can do today, and the much larger system I'm building on that foundation.</p>
+
+<h2>The nine-year-old scan</h2>
+
+<p>In August, my doctor told me that my ferritin and rheumatoid factor were still elevated, and he didn't have a clean explanation for either. He ordered a liver elastography, a scan that measures fat and stiffness in the liver. That surprised me. I rarely drink, I'm lean and active. I wasn't trying to rule it out but I wanted to know whether I already had evidence that could put that question in my specific context. Nine years ago I'd had a whole-body MRI done, and I vaguely remembered that it said something about my liver. Was anything in there relevant?</p>
+
+<p>I asked the agent that runs my Personal Health Record, and two minutes later I had that prior evidence. The December 2017 scan had looked at my liver and put liver fat at 2 percent, with anything under 4 percent counted as normal. Usefully, I also got the following caveats: the scan is nine years old, it wasn't elastography, it never measured stiffness, and it couldn't rule out anything that developed since. In other words, the old result didn't make the new scan unnecessary. I then asked for a short note for my doctor along with the relevant data for review. The agent built that document, which I sent directly to the doctor.</p>
+
+<div class="artifact">
+<p class="src"><span>from the session log · doctor's name redacted</span><span class="date">Aug 16–17, 2026</span></p>
+<div class="msg"><p class="who">Laurence</p>
+<p>Would this have been reviewed as part of my whole body scan? Is there anything about my liver in the Health Nucleus reports? Or in any other records that might bear on this question?</p></div>
+<div class="msg advisor"><p class="who">Agent</p>
+<p>Yes&mdash;your liver was explicitly reviewed in the 2017 Health Nucleus whole-body MRI, and the result was reassuring at that time. <strong>Liver fat: 2%</strong>, with the report defining normal as under 4% <span class="cut">[&hellip;]</span> The crucial caveat: this was a December 2017 noncontrast whole-body screening MRI, not liver elastography. <span class="cut">[&hellip;]</span> the 2017 scan cannot rule out fatty liver or fibrosis that developed during the intervening nine years. I would proceed with the ordered study. [2026-0030]</p></div>
+<p class="stage">(The next day:)</p>
+<div class="msg"><p class="who">Laurence</p>
+<p>Could you craft a very short message I could send to the doctor with the notes about the liver imaging and also give me an easy click-through link to the right document?</p></div>
+<div class="msg advisor"><p class="who">Agent</p>
+<p>Send this: Hi Dr. <span class="cut">[&hellip;]</span> &mdash; I found my 12/21/2017 Health Nucleus whole-body MRI. It described my liver as normal, with 2% liver fat (normal &lt;4%) <span class="cut">[&hellip;]</span> It was not elastography and did not assess liver stiffness/fibrosis, but I&rsquo;m sharing it in case it&rsquo;s useful context for the current workup. &mdash; Attach this send-ready PDF: it includes a navigation cover with clickable links, followed by both original report pages.</p></div>
+</div>
+
+<p>Nothing got diagnosed in that exchange. Nine years of my own history, which the healthcare system doesn't know exists, showed up in the right conversation in a couple of minutes and went back into the formal record. It's a small, recent example of what I'm building. The rest of this piece is about what had to exist for that to happen, and what I intend to build on that foundation.</p>
+
+<h2>One folder: originals below, views above</h2>
+
+<p>The Personal Health Record is one folder on my laptop. The bottom half is a vault: every original health file I've been able to get my hands on, kept exactly as I received it. That includes lab reports, imaging, my genome, wearable exports, and messages from my doctor. The top half is a reading room: summaries, trend lines, and one file per health topic (blood work, genomics, and so on), all generated from the vault. The originals never change, and the disposable views get regenerated whenever I check in a new record or improve the procedure that builds them.</p>
+
+<aside class="note"><div><p class="label">§ accession</p><p>An accession number is the permanent ID an archive gives an item the moment it's accepted into the collection.</p></div></aside>
+
+<p>There's almost no code in the record. It runs on three plain formats, YAML for the catalog cards, Markdown for the views, and SHA-256 checksums for the files, plus a set of written procedures. I run the record with Claude Code or Codex, which let a model read and modify files on my computer, so I can give it written procedures instead of building an application. The procedures don't depend on which model reads them. When I say "check this file in," an agent session runs the check-in procedure: assign the next accession number,<span class="fn">§</span> wrap the file in a catalog card that records where it came from and when, checksum it, and regenerate whatever views it touches. Git records every change to the text, and checksums reveal if the bytes in an original file ever change. Because the folder is my medical history, it has no git remote and doesn't live in a synced folder. That's written into the agent's operating rules as a cardinal rule, right after "never modify anything in the vault."</p>
+
+<figure class="diagram">
+<div class="pan"><svg viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" role="img" aria-label="Inputs flow through a check-in procedure into a vault of originals and a reading room of regenerated views; answers, exports, and other advisors read from the reading room, and every view keeps a link back down to the vault.">
+  <g font-size="9" fill="#2b2620">
+    <g stroke="#c9bfa8" fill="#fcf8ee">
+      <rect x="4" y="14" width="118" height="26" rx="2"/>
+      <rect x="4" y="50" width="118" height="26" rx="2"/>
+      <rect x="4" y="86" width="118" height="26" rx="2"/>
+      <rect x="4" y="122" width="118" height="26" rx="2"/>
+      <rect x="4" y="158" width="118" height="26" rx="2"/>
+    </g>
+    <text x="14" y="31">LAB REPORT (PDF)</text>
+    <text x="14" y="67">IMAGING REPORT</text>
+    <text x="14" y="103">GENOME · 109.55 GiB</text>
+    <text x="14" y="139">WEARABLE EXPORT</text>
+    <text x="14" y="175">DOCTOR MESSAGE</text>
+  </g>
+  <g stroke="#a3987f" fill="none" stroke-width="1.1">
+    <path d="M122 27 C 140 27, 140 100, 152 100"/>
+    <path d="M122 63 C 140 63, 140 100, 152 100"/>
+    <path d="M122 99 L 152 99"/>
+    <path d="M122 135 C 140 135, 140 100, 152 100"/>
+    <path d="M122 171 C 140 171, 140 100, 152 100"/>
+  </g>
+  <rect x="154" y="66" width="140" height="66" rx="2" fill="#fcf8ee" stroke="#b07a34" stroke-width="1.4"/>
+  <text x="166" y="86" font-size="10" fill="#2b2620">CHECK-IN PROCEDURE</text>
+  <text x="166" y="102" font-size="8.5" fill="#8c8069">next id · catalog card</text>
+  <text x="166" y="116" font-size="8.5" fill="#8c8069">checksum · rebuild views</text>
+  <g stroke="#b07a34" fill="none" stroke-width="1.2">
+    <path d="M294 90 C 310 90, 310 66, 326 66"/>
+    <path d="M294 110 C 310 110, 310 170, 326 170"/>
+  </g>
+  <path d="M326 66 l -7 -4 v 8 z" fill="#b07a34"/>
+  <path d="M326 170 l -7 -4 v 8 z" fill="#b07a34"/>
+  <rect x="328" y="40" width="200" height="54" rx="2" fill="#fcf8ee" stroke="#c9bfa8"/>
+  <text x="340" y="58" font-size="10" fill="#2b2620">READING ROOM</text>
+  <text x="340" y="72" font-size="8.5" fill="#8c8069">topics · trends · summary</text>
+  <text x="340" y="85" font-size="8.5" fill="#8c8069">open questions · disposable</text>
+  <rect x="328" y="144" width="200" height="54" rx="2" fill="#fcf8ee" stroke="#c9bfa8"/>
+  <text x="340" y="162" font-size="10" fill="#2b2620">VAULT</text>
+  <text x="340" y="176" font-size="8.5" fill="#8c8069">2026-00NN/envelope.yaml + original</text>
+  <text x="340" y="189" font-size="8.5" fill="#8c8069">bytes, checksummed, never edited</text>
+  <path d="M344 94 L 344 144" stroke="#b07a34" stroke-width="1" fill="none"/>
+  <path d="M344 144 l -4 -7 h 8 z" fill="#b07a34"/>
+  <text x="352" y="114" font-size="8" fill="#b07a34" font-style="italic">every value cites</text>
+  <text x="352" y="125" font-size="8" fill="#b07a34" font-style="italic">its accession</text>
+  <path d="M480 144 L 480 94" stroke="#a3987f" stroke-width="1" fill="none"/>
+  <path d="M480 94 l -4 7 h 8 z" fill="#a3987f"/>
+  <text x="487" y="122" font-size="8" fill="#8f887a" font-style="italic">rebuild</text>
+  <g stroke="#a3987f" fill="none" stroke-width="1.1">
+    <path d="M528 60 C 540 60, 540 27, 552 27"/>
+    <path d="M528 67 L 552 67"/>
+    <path d="M528 74 C 540 74, 540 107, 552 107"/>
+  </g>
+  <g stroke="#c9bfa8" fill="#fcf8ee">
+    <rect x="554" y="14" width="82" height="26" rx="2"/>
+    <rect x="554" y="54" width="82" height="26" rx="2"/>
+    <rect x="554" y="94" width="82" height="26" rx="2"/>
+  </g>
+  <g font-size="8" fill="#2b2620">
+    <text x="560" y="25">CITED ANSWER</text>
+    <text x="560" y="35" fill="#8c8069">[2026-0030]</text>
+    <text x="560" y="65">SEND-READY PDF</text>
+    <text x="560" y="75" fill="#8c8069">→ the portal</text>
+    <text x="560" y="105">OTHER ADVISORS</text>
+    <text x="560" y="115" fill="#8c8069">read it too</text>
+  </g>
+  <text x="328" y="228" font-size="9" fill="#8f887a" font-style="italic">no remote · no cloud sync · 48 accessions as of Aug 30</text>
+  <text x="4" y="228" font-size="9" fill="#8f887a" font-style="italic">git tracks the text · checksums guard the payloads</text>
+</svg></div>
+<figcaption>The whole record: originals below, views above, a procedure in between</figcaption>
+</figure>
+
+<aside class="note"><div><p class="label">* archival lineage</p><p>The borrowed principle is that capture is the only unrepeatable event. Processing can be deferred, and redone, forever.</p></div></aside>
+
+<p>None of this design is original.<span class="fn">*</span> Archives assigned accession numbers before software existed. Libraries keep the closed stacks apart from the reading room. The Library of Congress checksums its collections. I explained it to a friend this way: you always keep the primary sources, the primary sources sit at the bottom, you build derived data on top, and you keep a way to connect every claim and every insight back to the original it came from.</p>
+
+<div class="artifact">
+<p class="src"><span>vault/2026/2026-0030/envelope.yaml</span><span class="date">verbatim, trimmed</span></p>
+<pre class="filecard"><span class="fm">envelope_version: "1"
+id: "2026-0030"</span>
+title: "HLI Health Nucleus &mdash; 2017-12-21 Whole-Body-MRI Mid-Thigh
+  Report Normal-PIRADS1-LiverFat-2pct"
+type: "imaging-report"
+source: "Human Longevity Inc &mdash; Health Nucleus, San Diego"
+event_date: "2017-12-21 (inferred)"
+acquired_date: "2026-05-15 (inferred)"
+notes: "Whole-body MRI (mid-thigh) report. <span class="cut">[&hellip;]</span> event_date
+  2017-12-21 from filename. HLI report scanned/re-rendered
+  2021-04-14 (PDF metadata), so PDF CreationDate is the scan
+  date, not the event date."
+<span class="meta">events:
+  - {date: "2026-06-10", type: "ingestion", agent: "claude",
+     detail: "migrated via procedures/migration.md"}</span></pre>
+</div>
+
+<p>That catalog card is what connects the answer about my liver to its citation. The [2026-0030] at the end of the agent's message is an accession number. Follow it and you get the card. The card sits next to the original PDF, byte for byte what Health Nucleus handed me in 2017. Notice the card is already arguing with itself about dates, because the PDF's metadata says 2021 and the filename says 2017, and it wrote down which one to believe and why. Yay metadata.</p>
+
+<figure class="diagram">
+<div class="pan"><svg viewBox="0 0 640 110" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" role="img" aria-label="Chain: original file, accession with checksum, reading-room view, cited answer. Every value walks back to the file it came from.">
+  <g font-size="9.5" fill="#2b2620">
+    <g stroke="#c9bfa8" fill="#fcf8ee">
+      <rect x="4" y="30" width="130" height="34" rx="2"/>
+      <rect x="166" y="30" width="130" height="34" rx="2"/>
+      <rect x="328" y="30" width="130" height="34" rx="2"/>
+      <rect x="490" y="30" width="146" height="34" rx="2"/>
+    </g>
+    <text x="18" y="45">ORIGINAL FILE</text>
+    <text x="18" y="58" font-size="8" fill="#8f887a">the 2017 MRI report pdf</text>
+    <text x="180" y="45">ACCESSION</text>
+    <text x="180" y="58" font-size="8" fill="#8f887a">2026-0030 · sha-256</text>
+    <text x="342" y="45">READING ROOM</text>
+    <text x="342" y="58" font-size="8" fill="#8f887a">the imaging topic file</text>
+    <text x="504" y="45">CITED ANSWER</text>
+    <text x="504" y="58" font-size="8" fill="#8f887a">"liver fat 2% [2026-0030]"</text>
+    <g stroke="#a3987f" stroke-width="1.1">
+      <path d="M134 47 L 166 47"/><path d="M296 47 L 328 47"/><path d="M458 47 L 490 47"/>
+    </g>
+  </g>
+  <path d="M560 82 L 60 82" stroke="#b07a34" stroke-width="1" fill="none"/>
+  <path d="M60 82 l 7 -4 v 8 z" fill="#b07a34"/>
+  <text x="150" y="100" font-size="9.5" fill="#b07a34" font-style="italic">every value walks back to the file it came from</text>
+</svg></div>
+<figcaption>End-to-end provenance for the liver scan</figcaption>
+</figure>
+
+<aside class="note"><div><p class="label">† the one rule, precisely</p><p>Payload bytes, IDs, and manifests never change. A catalog card can be corrected, but only by appending an audit event that says what changed and why. Abandoned check-ins with no card get swept.</p></div></aside>
+
+<p>The record launched on June 10 with 39 artifacts and holds 48 as I write this. Every file was checksum-verified at launch, and every new file is verified on the way in.<span class="fn">†</span> The point of holding the files, instead of a login to each place they live, is durability. Data available only through someone else's portal can't be a foundation I control. Access can disappear but I retain possession. Data sovereignty starts with a folder I own, containing the original files. The reading room can be wrong and get rebuilt. The vault is the part nobody else can revoke or lose.</p>
+
+<details class="unfold">
+<summary>building this yourself</summary>
+<p>If you want to copy this approach, these are the eight key steps. 1) Preserve the original files untouched. 2) Give each accepted file a stable ID and a card that records where it came from. 3) Verify integrity with checksums. 4) Generate replaceable views instead of editing originals. 5) Link every extracted claim back to its source. 6) Record corrections as supersessions, never as rewrites. 7) Give the agent written procedures for check-in, retrieval, and what to do when it doesn't know. 8) Back up, and test the restore. I wrote a plain-language walkthrough for a friend that covers the rest; you can reach out if you want it, or I'll eventually put it on GitHub.</p>
+</details>
+
+<h2>Nobody is watching the whole picture of you</h2>
+
+<p>My health history is spread across a half-dozen health systems, and in some cases you have to pay to get copies of your own records. Care is organized around specific encounters and the immediate clinical question, not maintaining a complete picture of me over time. Each clinician sees what their system contains and what I remember to bring. A persistent problem that isn't dangerous struggles for sustained attention without sustained pressure. No one is responsible for integrating my history across providers, devices, and years. In practice that job falls to me.</p>
+
+<p>We also learn, and are socialized, to put up with persistent aches, bad sleep, and generally feeling unwell. Who do you complain to that could help? You're not a doctor. What do you know? So you learn to live with it, and a pain in your foot becomes a limp, and a limp becomes a lifelong compensation, with no one watching over you. I've written about <a href="what-are-you-actually-solving.html">step zero</a>, confirming what the problem actually is before you work on it. A fifteen-minute preventative appointment with a physician won't run step zero on your life.</p>
+
+<p>This spring I ran a large direct-to-consumer blood panel through Function Health. The testing itself is comprehensive. The analysis layer on top, however, read like someone had spent thirty seconds on it. There were a few warnings, and no attempt to make sense of the broader picture as it pertains to my goals and current situation. The sense-making is the hard part.</p>
+
+<p>My annual physical in July is a concrete example. I'd been working through some symptoms with another advisor and I wasn't sure how to proceed. The health advisor helped me identify the three relevant questions to take to my physical, along with backing evidence from the record. Based on that evidence, my doctor ordered workups on all three and added an additional test. Without that back-and-forth, the appointment would have been a lost opportunity. The results came back into the record, and that's where the ferritin workup at the top of this piece started.</p>
+
+<p>So if the jobs of integrating and sensemaking are mine, what does the record have to do? As you've just seen, the first requirement is that it has to hold the actual files, in my custody. The other four are harder. It has to give every signal a place to meet. It has to treat me as a process, not a snapshot. It has to keep representations above the evidence, because the evidence is outgrowing what any person can read. And it has to say only what the evidence supports.</p>
+
+<h2>Every signal needs a place to meet</h2>
+
+<p>Checking everything into one folder is only the first step, because sitting in the same folder isn't integration. The extraction procedure places each new record's information into shared topic and trend views, with a citation back to its accession, and an agent session can then assemble those views around a question. My current ferritin thread is the working example. It connects this summer's bloodwork, two generations of genetic evidence, the 2017 liver imaging, and my doctor's current plan. They remain different kinds of evidence, from different years and different institutions, but they can finally appear in the same investigation.</p>
+
+<div class="artifact">
+<p class="src"><span>reading-room/topics/blood-work.md · generated from the vault · doctor's name redacted</span><span class="date">trimmed and redacted · through 2026-0045</span></p>
+<pre class="filecard"><span class="meta">### Flagged results [2026-0045]</span>
+- Ferritin 431 ng/mL (H; ref 16&ndash;243), verified by repeat analysis.
+  This rose from 388 ng/mL on 2026-05-07 [2026-0024][2026-0045].
+- Rheumatoid factor 37 IU/mL (H; ref &lt;=14), down from 47 IU/mL on
+  2026-05-07 but still elevated [2026-0024][2026-0045].
+<span class="meta">### HFE hemochromatosis panel [2026-0045]</span>
+- C282Y negative; <span class="cut">[&hellip;]</span>; S65C negative. ARUP's
+  interpretation states that this genotype has not been associated
+  with symptoms of hereditary hemochromatosis.
+- This clinically confirms the HFE <span class="cut">[&hellip;]</span> observation
+  previously reported by HLI research WGS and reproduced in its VCF
+  [2026-0035][2026-0044][2026-0045].
+- On 2026-08-23, <span class="cut">[my doctor]</span> wrote that the single <span class="cut">[&hellip;]</span> copy does
+  not appear to indicate hemochromatosis disease. He considered fatty
+  liver the most common explanation for the elevated ferritin, planned
+  to review the liver ultrasound, and would consult hematology if the
+  ultrasound does not show fat [2026-0045].</pre>
+</div>
+
+<p>Nothing in that view was written by hand. It was generated from the vault, and every line carries the accession it came from, so when my doctor's plan changes, the next extraction changes the view and the citation with it. In practice, "a place to meet" means putting a lab value from one institution, a genetic result from a second, a research genome from a third, and a doctor's message from the portal, all in one file, each traceable to its original.</p>
+
+<h2>A person is a process, not a snapshot</h2>
+
+<p>A blood pressure taken once a year at the doctor's office is one reading, in one setting, on one day, after you drove there and sat in the waiting room. It's a fact, but it isn't a picture. Your heart rate in bed and your heart rate after climbing the stairs to the office are two very different numbers from the same body. A blood panel doesn't know where in a woman's cycle she was. We collect a few isolated points about a person and then reason from them as if they were a complete picture.</p>
+
+<p>The record needs to keep the conditions with the value. We don't want just a number, but the number on this date, fasting or not, after this kind of week, on this medication. A lab report tells you whether a result is inside the reference range. That doesn't tell me how the result compares with my own history or goals. Population benchmarks have limits. Lab ranges differ by institution. Function Health flagged a lipid result that my doctor reads as fine. Other population benchmarks are built from coarse measures designed for populations, not individuals. BMI doesn't distinguish muscle from fat. Mine is 27, which the chart labels overweight, and the body-composition tests in the same record show why that label is misleading. A clinically acceptable result may still be far from my target.</p>
+
+<p>Your own baseline is a different kind of reference. A high-level endurance athlete can have a resting heart rate low enough to alarm an emergency room, and against the population it looks abnormal. Against their own history it's expected. So the record needs three reference points. The population range says what's unusual across people. My own history says what's unusual for me. And my current target is a reference point nobody keeps for me.</p>
+
+<figure class="diagram">
+<div class="pan"><svg viewBox="0 0 640 170" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" role="img" aria-label="Two timelines. The record today: four isolated dots across years, a blood pressure, a lab panel, a note, an image. The record arriving: a dense nightly stream, a continuous glucose curve, a genome block, full-resolution imaging.">
+  <text x="4" y="16" font-size="10" fill="#2b2620">THE RECORD TODAY</text>
+  <path d="M60 46 L 620 46" stroke="#c9bfa8" stroke-width="1"/>
+  <g fill="#b07a34">
+    <circle cx="110" cy="46" r="3.5"/><circle cx="270" cy="46" r="3.5"/><circle cx="300" cy="46" r="3.5"/><circle cx="520" cy="46" r="3.5"/>
+  </g>
+  <g font-size="8" fill="#8c8069">
+    <text x="84" y="64">annual BP</text>
+    <text x="238" y="64">one panel</text>
+    <text x="288" y="76">one note</text>
+    <text x="470" y="64">one image → one paragraph</text>
+  </g>
+  <text x="4" y="104" font-size="10" fill="#2b2620">THE RECORD ARRIVING</text>
+  <path d="M60 134 L 620 134" stroke="#c9bfa8" stroke-width="1"/>
+  <polyline fill="none" stroke="#b07a34" stroke-width="1" points="60,131 66,129 72,133 78,128 84,132 90,130 96,134 102,129 108,131 114,127 120,132 126,130 132,133 138,128 144,131 150,130 156,134 162,129 168,131 174,127 180,132 186,130 192,133 198,128 204,131 210,130 216,134 222,129 228,131 234,127 240,132 246,130 252,133 258,128 264,131 270,130 276,134 282,129 288,131 294,127 300,132 306,130 312,133 318,128 324,131 330,130 336,134 342,129 348,131 354,127 360,132 366,130 372,133 378,128 384,131 390,130 396,134 402,129 408,131 414,127 420,132 426,130 432,133 438,128 444,131 450,130 456,134 462,129 468,131 474,127 480,132 486,130 492,133 498,128 504,131 510,130 516,134 522,129 528,131 534,127 540,132 546,130 552,133 558,128 564,131 570,130 576,134 582,129 588,131 594,127 600,132 606,130 612,133 618,129"/>
+  <rect x="150" y="112" width="60" height="8" fill="#b07a34" opacity=".55"/>
+  <rect x="330" y="112" width="24" height="8" fill="#b07a34" opacity=".85"/>
+  <rect x="430" y="112" width="40" height="8" fill="#b07a34" opacity=".55"/>
+  <g font-size="8" fill="#8c8069">
+    <text x="60" y="152">sleep · HR · HRV · temp, every night</text>
+    <text x="150" y="108">CGM, 288 readings a day</text>
+    <text x="318" y="108">genome</text>
+    <text x="410" y="108">full-res imaging</text>
+    <text x="430" y="152">plus everything above, still</text>
+  </g>
+</svg></div>
+<figcaption>The same body, two ways of looking at it</figcaption>
+</figure>
+
+<h2>We are still measuring too little</h2>
+
+<p>The obvious fix for snapshots is to measure more often. And the corresponding objection is that you end up hoarding data you never use, which is half right. More data is not automatically more knowledge. It can create noise, false patterns, and more material than anyone can interpret. But precision isn't the only thing that makes data useful. A slightly noisy measurement taken every day can tell you more about a changing person than a precise measurement taken once a year. The stream establishes a baseline, shows direction, and makes departures from normal visible. A continuous glucose trace isn't wasted data lying around. One fasting number a year tells you where you were that morning. The trace shows how you respond to a meal, and whether that response is changing.</p>
+
+<p>We don't yet know which streams will matter. Some cheap, consistent measurements will turn out to reveal changes nobody knew to look for, and most such experiments will produce nothing. Where collection is cheap and low-risk, preserve more. Keep the irreplaceable raw evidence. For routine streams, extract the durable patterns, then compact or prune the rest under explicit rules. Collection shouldn't be random. The system I want would identify a measurement that's cheap to get and likely to matter, then ask for it next.</p>
+
+<aside class="note"><div><p class="label">‡ the wager</p><p>The wager I take from Rich Sutton's <a href="https://www.cs.utexas.edu/~eunsol/courses/data/bitter_lesson.pdf">Bitter Lesson</a> is not that data automatically becomes knowledge. It's that we repeatedly underestimate what scalable methods can extract once enough data exists.</p></div></aside>
+
+<p>Health records were designed for sparse snapshots. Dense longitudinal streams need machinery that can preserve and compress them without losing provenance. That machinery also has to compare them against your baseline and make them interpretable. The layers above the vault are meant to do that. There's one more reason to collect more data. A model can only reason about the data it's given, and right now every model meets me with almost no context about me. Much of what I'm doing here is making myself legible to systems that are dramatically increasing in capability.<span class="fn">‡</span></p>
+
+<h2>The record is outgrowing what a person can read</h2>
+
+<p>For most of medical history the picture of a person was whatever a clinician could collect and hold in their head. A blood pressure, a panel, a note, an image reduced to a paragraph of radiology report. That model of a health record no longer fits the volume of data we can collect. If you wear an Oura ring, you generate a stream. A continuous glucose monitor turns one annual number into a curve. A full-resolution imaging study is a few gigabytes. A genome is over a hundred. Nobody can read or reason about the raw, unprocessed stream.</p>
+
+<p>My genome made this concrete. It arrived as 109.55 GiB of raw sequencing files. The check-in procedure vaulted them untouched and never opened them again. The analysis used the 91 MiB variant file and a gigabyte of local scratch space. Nothing was uploaded. It produced seven reports whose conclusion, for the variants they could analyze, was that none justified a claim about my health.</p>
+
+<div class="artifact">
+<p class="src"><span>from the genome session</span><span class="date">Aug 22, 2026</span></p>
+<div class="msg"><p class="who">Laurence</p>
+<p>The executive brief told me a lot of ... nothing. I guess no news is good news?</p></div>
+<div class="msg advisor"><p class="who">Agent</p>
+<p>Yes: for the part we analyzed, no news is good news. <span class="cut">[&hellip;]</span> The long report feels empty because responsible genomic interpretation contains a lot of "this does not justify a conclusion."</p></div>
+</div>
+
+<p>I'd rather get no conclusion than have a system make one up to sound useful. The genome also shows the shape of the answer to "too big to read." At the bottom are the raw reads. Above them is the variant file, a thousandth the size, which discards detail to become usable. Annotated reports sit above that, followed by a view for one specific question and then a decision. Each layer becomes more useful for a particular question while keeping a link to the evidence below it. Imaging is starting to take the same shape. The raw images behind that 2017 MRI report arrived at the end of August, 466 MB of DICOM files, checked in next to the two-page report.</p>
+
+<figure class="diagram">
+<div class="pan"><svg viewBox="0 0 640 236" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" role="img" aria-label="Five stacked layers, widest at the bottom: high-fidelity source, durable intermediate, concern-specific view, interpretation, decision. Each keeps a link to the layer below.">
+  <g stroke="#c9bfa8" fill="#fcf8ee">
+    <rect x="140" y="10" width="380" height="34" rx="2"/>
+    <rect x="120" y="54" width="420" height="34" rx="2"/>
+    <rect x="100" y="98" width="460" height="34" rx="2"/>
+    <rect x="80" y="142" width="500" height="34" rx="2"/>
+    <rect x="60" y="186" width="540" height="40" rx="2" stroke="#b07a34" stroke-width="1.4"/>
+  </g>
+  <g font-size="9.5" fill="#2b2620">
+    <text x="152" y="24">DECISION</text>
+    <text x="152" y="37" font-size="8" fill="#8c8069">nothing to act on; keep the reads for better tools later</text>
+    <text x="132" y="68">INTERPRETATION</text>
+    <text x="132" y="81" font-size="8" fill="#8c8069">"this does not justify a conclusion," many times over</text>
+    <text x="112" y="112">CONCERN-SPECIFIC VIEW</text>
+    <text x="112" y="125" font-size="8" fill="#8c8069">seven reports, annotated against ClinVar · run locally, 1.0 GiB scratch</text>
+    <text x="92" y="156">DURABLE INTERMEDIATE</text>
+    <text x="92" y="169" font-size="8" fill="#8c8069">the variant file (VCF), 91 MiB · silence at a coordinate is not a negative</text>
+    <text x="72" y="203">HIGH-FIDELITY SOURCE</text>
+    <text x="72" y="217" font-size="8" fill="#8c8069">raw sequencing reads, 109.55 GiB · vaulted, checksummed, never reopened</text>
+  </g>
+  <g font-size="8.5" fill="#8f887a" font-style="italic">
+    <text x="4" y="60">less detail</text>
+    <text x="4" y="72">more use</text>
+    <text x="4" y="204">all of it</text>
+  </g>
+  <path d="M24 82 L 24 190" stroke="#a3987f" stroke-width="1" fill="none"/>
+  <path d="M24 82 l -4 7 h 8 z" fill="#a3987f"/>
+  <path d="M618 20 L 618 200" stroke="#b07a34" stroke-width="1" fill="none"/>
+  <path d="M618 200 l -4 -7 h 8 z" fill="#b07a34"/>
+  <text x="626" y="40" font-size="8" fill="#b07a34" font-style="italic" transform="rotate(90 626 40)">each layer links to the one below</text>
+</svg></div>
+<figcaption>The representation stack, using the genome as the example</figcaption>
+</figure>
+
+<p>My representations are crude, and I'm not claiming the ones I built are the complete answer. The principle I'm confident in is to preserve high-fidelity evidence below and produce selective, replaceable views above it without confusing the view for the record.</p>
+
+<h2>It has to say only what the evidence supports</h2>
+
+<p>More data doesn't give you certainty. Most of the time, the evidence isn't enough to settle the question. Cases where one gene decides it are rare. Mostly you're weighing incomplete evidence and making the smartest call you can within your given context. The record gives me more evidence, better arranged, with the gaps marked. It helps me make better decisions without pretending the uncertainty has gone away.</p>
+
+<p>That discipline has to be built into the routine work, not just the answers, because most of what the record says later comes from what got extracted at check-in. When my annual exam was checked in this July, the agent wrote a log of what it did and didn't extract.</p>
+
+<div class="artifact">
+<p class="src"><span>ops/runs/2026-07-28-extraction-2026-0040.md · verbatim, trimmed</span><span class="date">Jul 28, 2026</span></p>
+<pre class="filecard"><span class="meta"># Extraction Run - 2026-0040
+- Source: <span class="cut">[&hellip;]</span> annual exam visit details, event date 2026-07-27</span>
+
+## Extraction decisions
+
+- The PDF embeds a photograph of the 2026-05-07 Function Health /
+  Quest laboratory summary. Those measurements were already
+  extracted from the source-of-record PDF at 2026-0024 and were
+  not extracted again from 2026-0040.
+- Accession 2026-0040 contributes the <span class="cut">[&hellip;]</span> clinician's
+  interpretation, diagnoses/problem-list context, orders, current
+  visit vitals, and treatment plan.
+- Historical <span class="cut">[&hellip;]</span> BP readings displayed in the visit's "last 3
+  encounters" table were added to the blood-pressure trend and
+  cited to 2026-0040.
+- The current clinic weight was added to the weight trend with its
+  clinic-scale context. No body-fat value was inferred.
+- <strong>Ordered tests were recorded as pending orders, not as
+  completed results.</strong></pre>
+</div>
+
+<p>Left to itself, a model will fill in a missing result or count the same lab twice. It's important to guard against those kinds of errors by tracking extraction decisions. This doesn't prevent every mistake, but it helps to recover from them.</p>
+
+<p>Together, those five requirements make the record a foundation I can build on.</p>
+
+<h2>A record that gets better with use</h2>
+
+<p>Each new file extends the evidence. Each question exposes what's missing. When I correct a procedure, the correction becomes a standing rule. Better models provide a second source of improvement. Because the original artifacts weren't flattened into somebody else's schema, a new model can reread the same evidence and produce a better view. New models arrive every few months. Most software stays exactly as capable as the day you bought it until someone rebuilds it. This one gets better the more I use it.</p>
+
+<figure class="diagram">
+<div class="pan"><svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" role="img" aria-label="Loop one: more use, more context, better views, better decisions, and back to more use. Loop two: a new model or harness re-reads the same preserved evidence and produces better views and answers, and the next model does it again.">
+  <text x="4" y="12" font-size="9" fill="#8f887a" font-style="italic">loop one · use</text>
+  <g stroke="#c9bfa8" fill="#fcf8ee">
+    <rect x="4" y="20" width="120" height="30" rx="2"/>
+    <rect x="164" y="20" width="120" height="30" rx="2"/>
+    <rect x="324" y="20" width="140" height="30" rx="2"/>
+    <rect x="504" y="20" width="132" height="30" rx="2"/>
+  </g>
+  <g font-size="9" fill="#2b2620">
+    <text x="16" y="38">MORE USE</text>
+    <text x="176" y="38">MORE CONTEXT</text>
+    <text x="336" y="38">BETTER VIEWS</text>
+    <text x="516" y="38">BETTER DECISIONS</text>
+  </g>
+  <g stroke="#a3987f" stroke-width="1.1" fill="none">
+    <path d="M124 35 L 164 35"/><path d="M284 35 L 324 35"/><path d="M464 35 L 504 35"/>
+  </g>
+  <path d="M570 50 L 570 70 L 64 70 L 64 50" stroke="#b07a34" stroke-width="1" fill="none"/>
+  <path d="M64 50 l -4 7 h 8 z" fill="#b07a34"/>
+  <text x="200" y="66" font-size="8.5" fill="#b07a34" font-style="italic">and more useful context next time</text>
+  <text x="4" y="112" font-size="9" fill="#8f887a" font-style="italic">loop two · machinery</text>
+  <g stroke="#c9bfa8" fill="#fcf8ee">
+    <rect x="4" y="120" width="180" height="30" rx="2"/>
+    <rect x="224" y="120" width="200" height="30" rx="2"/>
+    <rect x="464" y="120" width="172" height="30" rx="2"/>
+  </g>
+  <g font-size="9" fill="#2b2620">
+    <text x="16" y="138">NEW MODEL OR HARNESS</text>
+    <text x="236" y="138">RE-READS THE SAME EVIDENCE</text>
+    <text x="476" y="138">BETTER VIEWS, ANSWERS</text>
+  </g>
+  <g stroke="#a3987f" stroke-width="1.1" fill="none">
+    <path d="M184 135 L 224 135"/><path d="M424 135 L 464 135"/>
+  </g>
+  <path d="M550 150 L 550 170 L 94 170 L 94 150" stroke="#b07a34" stroke-width="1" fill="none"/>
+  <path d="M94 150 l -4 7 h 8 z" fill="#b07a34"/>
+  <text x="180" y="166" font-size="8.5" fill="#b07a34" font-style="italic">the next model, same preserved evidence, every few months</text>
+  <text x="4" y="192" font-size="8.5" fill="#8f887a" font-style="italic">the originals never change, so every new model gets a fresh pass at all of them</text>
+</svg></div>
+<figcaption>The two loops. I drive the first; model and harness builders drive the second</figcaption>
+</figure>
+
+<h2>The foundation the 2014 advisor was missing</h2>
+
+<p>I've been thinking about this problem since at least 2014, when I published a short piece called <a href="https://medium.com/@favrot/building-a-compass-out-of-tea-leaves-a3f7352bea8e">Building a compass out of tea leaves</a>. The argument was that we make health decisions every day with almost no guidance, that the professional guidance we do get is episodic and blurry, and that what we needed was an advisor layer combining expert knowledge, lots of data, and human judgment. It named three problems: every expert is limited by what they know, there's more relevant knowledge than any one person can sift through, and it's hard to find the action with the most leverage. It opened with a nurse reading my blood pressure at an annual screening and ended with me admitting I still didn't know what to do with those two numbers.</p>
+
+<p>A model can now surface useful evidence across a personal record quickly enough to make that advisor practical. My <a href="fitness-advisor.html">fitness advisor</a> is one example. What I missed in 2014 is what has to sit underneath it. An advisor can't integrate evidence it can't access or see a trend without history. If the original is gone, it can't revise an interpretation. And it shouldn't sound more certain than the record allows. The advisor I imagined in 2014 needed a foundation.</p>
+
+<h2>Isn't this terrible privacy practice?</h2>
+
+<p>I've been feeding my medical records and my genomic data through commercial AI systems. Isn't that a terrible idea? Maybe.</p>
+
+<p>My records were already scattered across portals, labs, and insurers, under agreements I never read, so the alternative wasn't fully private either. But consolidating them isn't free, and there are two separate risks. Consolidation gives me custody and makes the record usable, while increasing the consequences of a local compromise. Using hosted models adds a separate exposure to providers whose policies I don't control. I've decided those risks are worth the value for me, with safeguards, and I'm still working out better ones.</p>
+
+<p>Here is how I handle those risks now. The repository as a whole never leaves my machine. It has no remote or cloud sync. Selected derived views do leave the machine. For a given question, an agent session sends the relevant topic and trend files to a hosted model, not the vault. The genome work ran locally and never uploaded a read. I have turned off model training on both of my personal AI accounts. For Claude, that puts me under <a href="https://www.anthropic.com/news/updates-to-our-consumer-terms">its 30-day retention policy</a>.</p>
+
+<p>The preservation and security layer of the record is unfinished. That isn't a reason to leave everything scattered across systems that don't connect and don't serve you. Secure backup and tested recovery are the next layer of work, before the record grows further. And it's a fair argument that this shouldn't be a hobbyist's job at all.</p>
+
+<h2>What it costs to run</h2>
+
+<p>Aside from the cost to run the models, the biggest cost is my attention to run and develop the record and the advisors on top of it. I'm the user, the systems integrator, the data operator, the product designer, the health interpreter, the LLM operator, and the bullshit detector. This requires a bit of data engineering, a little systems thinking, some knowledge of how a body works, and enough technical depth to run it all. It isn't an app, and it isn't usable by a random person.</p>
+
+<p>The deepest failure mode took me a while to see. As models get stronger, their explanations get more plausible whether or not they're correct. If I can't evaluate those explanations, I lose the human-in-the-loop safeguard and become dependent on the model. I end up approving conclusions I no longer understand. In August, another advisor reading the health record treated an old blood-count question as unresolved.</p>
+
+<div class="artifact">
+<p class="src"><span>another advisor's files · the error, the correction, the rule · names redacted</span><span class="date">Aug 14–28, 2026</span></p>
+<pre class="filecard"><span class="meta">log/2026-08-14-labs-partial.md</span>
+## 3. &#9888; The eosinophil question may not have been answered
+
+<span class="meta">log/2026-08-28-labs-closed.md</span>
+## &#10004; Eosinophils &mdash; CLOSED by clinical decision, not by omission
+<strong>Correction, 2026-08-28.</strong> Earlier entries in this project recorded the
+eosinophil question as having "fallen through" because no differential
+was ever run. <strong>That was wrong, and it is the second time this advisor
+has carried an item as open that Laurence had already closed.</strong>
+
+<span class="meta">STATE-OF-PLAY.md · Standing, low-cost</span>
+- <strong>Stop re-opening closed items.</strong> Twice now this advisor has carried
+  something as unresolved that he had already settled <span class="cut">[&hellip;]</span>. When he
+  says a question was answered, it was answered.</pre>
+</div>
+
+<p>The machinery worked as designed. The error remains in the log, and the correction is dated. But the correction only happened because I remembered the appointment well enough to challenge a plausible story with a clean citation. Someone who couldn't evaluate that story might have accepted it.</p>
+
+<p>The next version has to be designed for discernment, not approval. Observations, interpretations, recommendations, and actions stay separate. Source evidence is always attached to a claim. Missing evidence and competing explanations get surfaced instead of smoothed over. The next version also has to recognize when a question exceeds both its competence and mine, then route it to an expert or a more appropriate system. Productization is not merely adding a friendly interface. It means encoding much of the missing operational expertise while preserving the individual's ability to understand, question, and override the system.</p>
+
+<p>Here are the unfinished parts, concretely. Custody is fragile because the record lives on one machine and independent recovery isn't complete. The vault holds two continuous-glucose exports, but most of my wearable history, including Oura and Apple Health, isn't in it yet. The representations are crude. The current record answers when I ask and does nothing on its own, so there's no proactivity or discoverability yet. Interpretation can be wrong even with perfect provenance. And there's no clinician directly in the loop. I'm relying heavily on the models plus my judgment.</p>
+
+<h2>What gets built on the foundation</h2>
+
+<p>The Personal Health Record is the evidence and the representations. The personal health system is the whole loop around it: the record, the agents and advisors that use it, me, my doctors, the decisions we make, and the new evidence those decisions produce. The agent operates on the record. It isn't the record, and it isn't the judgment.</p>
+
+<figure class="diagram flagship">
+<div class="pan"><svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" role="img" aria-label="A loop. Sources, observations, and measurements feed the Personal Health Record, which holds a vault of original evidence and a reading room of usable representations. An advisor or agent session raises a question, an uncertainty, or an option. Laurence, and when it matters a clinician, exercise judgment. An action, measurement, or observation produces new evidence, which returns to the top. The record is the evidence and representations; the personal health system is the whole loop.">
+  <g stroke="#c9bfa8" fill="#fcf8ee" stroke-width="1.2">
+    <rect x="170" y="12" width="330" height="36" rx="3"/>
+    <rect x="170" y="74" width="330" height="96" rx="3" stroke="#b07a34" stroke-width="1.8"/>
+    <rect x="184" y="112" width="146" height="46" rx="3"/>
+    <rect x="342" y="112" width="146" height="46" rx="3"/>
+    <rect x="170" y="196" width="330" height="48" rx="3"/>
+    <rect x="170" y="270" width="330" height="48" rx="3"/>
+    <rect x="170" y="344" width="330" height="48" rx="3"/>
+  </g>
+  <g font-size="11" fill="#2b2620">
+    <text x="184" y="35">SOURCES, OBSERVATIONS, MEASUREMENTS</text>
+    <text x="184" y="98">PERSONAL HEALTH RECORD</text>
+    <text x="196" y="131">VAULT</text>
+    <text x="354" y="131">READING ROOM</text>
+    <text x="184" y="215">ADVISOR OR AGENT SESSION</text>
+    <text x="184" y="289">LAURENCE, AND WHEN IT MATTERS, A CLINICIAN</text>
+    <text x="184" y="363">AN ACTION, MEASUREMENT, OR OBSERVATION</text>
+  </g>
+  <g font-size="10" fill="#8c8069">
+    <text x="196" y="147">original evidence</text>
+    <text x="354" y="147">usable representations</text>
+    <text x="184" y="233">raises a question, an uncertainty, or an option</text>
+    <text x="184" y="307">exercise judgment</text>
+    <text x="184" y="381">produces new evidence</text>
+  </g>
+  <g stroke="#8c8069" stroke-width="1.4" fill="none">
+    <path d="M335 48 L 335 74"/><path d="M335 170 L 335 196"/><path d="M335 244 L 335 270"/><path d="M335 318 L 335 344"/>
+  </g>
+  <g fill="#8c8069">
+    <path d="M335 74 l -5 -8 h 10 z"/><path d="M335 196 l -5 -8 h 10 z"/><path d="M335 270 l -5 -8 h 10 z"/><path d="M335 344 l -5 -8 h 10 z"/>
+  </g>
+  <path d="M500 368 L 572 368 L 572 30 L 502 30" stroke="#b07a34" stroke-width="1.6" fill="none"/>
+  <path d="M502 30 l 9 -5 v 10 z" fill="#b07a34"/>
+  <text x="582" y="200" font-size="10" fill="#b07a34" font-style="italic" transform="rotate(90 582 200)">new evidence returns</text>
+  <path d="M158 76 L 150 76 L 150 168 L 158 168" stroke="#b07a34" stroke-width="1.4" fill="none"/>
+  <g font-size="10.5" fill="#b07a34" font-style="italic">
+    <text x="6" y="110">the record:</text>
+    <text x="6" y="124">evidence and</text>
+    <text x="6" y="138">representations</text>
+  </g>
+  <path d="M138 14 L 130 14 L 130 390 L 138 390" stroke="#8c8069" stroke-width="1.4" fill="none"/>
+  <g font-size="10.5" fill="#6f6553" font-style="italic">
+    <text x="6" y="236">the personal</text>
+    <text x="6" y="250">health system:</text>
+    <text x="6" y="264">the whole loop</text>
+    <text x="6" y="304">the agent operates</text>
+    <text x="6" y="318">on the record;</text>
+    <text x="6" y="332">it isn't the record</text>
+  </g>
+</svg></div>
+<figcaption>From evidence to action and back</figcaption>
+</figure>
+
+<p>The capabilities I want are all points on that loop. A front page that makes the current state legible, so I get a briefing on the parts of my health most relevant to my goals right now. Personal baselines, so meaningful change is detectable. A doctor-visit loop that carries my reasoning in and captures the clinician's judgment coming out. Translation at the edges, so the record can take in whatever a provider sends and emit whatever a clinician's system expects, with real validation on the way out, instead of everyone first agreeing on one schema. And long-term custody, so the loop survives changes of provider, model, and eventually me, and serves my kids.</p>
+
+<div class="artifact">
+<p class="src"><span>where each layer actually stands</span><span class="date">Sep 2026</span></p>
+<div class="pan"><pre class="gridcard">vault · reading room · check-in procedure     <span class="on">working, in daily use</span>
+cited answers, send-ready exports             <span class="on">working</span>
+other advisors reading the record             <span class="on">working</span>
+raw imaging checked in beside its reports     <span class="on">working, since late August</span>
+genome pipeline, run locally                  <span class="on">ran once</span>
+continuous glucose in the vault               <span class="on">two exports; Oura next</span>
+longitudinal trends, personal baselines       crude
+front page                                    prototyped once, not in use
+visit loop (prep in, reasoning out)           designed
+cadence: what to measure next                 designed
+translation at the edges                      long-term
+outlives me                                   long-term</pre></div>
+</div>
+
+<p>Some products already recommend when to repeat a standard panel or suggest a follow-up test. What I haven't found is one that looks across the whole record and identifies the uncertainty most worth reducing. It would then tell you which next measurement would most improve the picture. My fitness advisor already answers a similar question. What's the highest-value thing I can do with the next 30 minutes? The next version will apply that question to the health record.</p>
+
+<h2>What should I measure next?</h2>
+
+<p>The 2014 piece ended with two blood-pressure numbers I didn't know what to do with. They're in the vault now. As best I can tell the reading behind that essay was taken on January 24, 2014, and it was 122/74. It sits in a table with every other blood pressure I have on record, from 2012 to this summer, each one cited to the document it came from.</p>
+
+<div class="artifact">
+<p class="src"><span>reading-room/trends/blood-pressure.md · generated from the vault</span><span class="date">trimmed · through 2026-0048</span></p>
+<div class="pan"><pre class="gridcard">Date        BP (mmHg)              Source                  [Accession]
+2012-03-14  118/70                 biometric screening     [2026-0007]
+2014-01-24  <strong>122/74</strong>                 biometric screening     [2026-0008]
+2017-12-21  130/67                 HLI echo header         [2026-0046]
+2018-02-14  132/82 134/84 136/84   insurance physical      [2026-0009]
+2023-02-02  126/78                 prior encounters        [2026-0040]
+2025-04-11  100/60                 prior encounters        [2026-0040]
+2026-07-27  112/74                 annual exam, seated     [2026-0040]</pre></div>
+</div>
+
+<p>The record still doesn't hand me an answer, for the blood pressure or for the ferritin. What it can do now is put this summer's 112/74 next to fourteen years of my own readings, as well as the population range, instead of leaving it as another isolated number. The next version needs to do something harder: decide what evidence is worth collecting next.</p>
+
+<p>So what do I do with those two numbers? Twelve years later I have an answer, at least for now. They go into a system I own and keep improving, where I can reliably use them to make better decisions and build more on top of them. That was the idea I took from David Deutsch's The Beginning of Infinity, which I cited at the end of the 2014 piece. Progress comes from a process that corrects its own errors and doesn't have a final state. In 2014 I had the idea and not the process. Now I have the first version of the process, and the two numbers are in it.</p>
+
+<p class="more"><a href="../writing.html">More writing →</a> <span style="margin:0 12px;color:var(--faint)">·</span> <a href="../map.html">How it fits together →</a></p>
+<footer>
+<a class="bio" href="../index.html">more at laurencefavrot.com</a>
+<a class="email" href="mailto:favrot@gmail.com">favrot@gmail.com</a>
+</footer>
+</main>
+<script data-goatcounter="https://laurencefavrot.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
