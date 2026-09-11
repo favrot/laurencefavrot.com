@@ -88,15 +88,15 @@ figure.flagship{max-width:696px}
 <p class="dek">I'm assembling my health history in one folder. What it can do today, and the much larger system I'm building on that foundation.</p>
 
 <div class="lede">
-<p>I've raised my expectations for my health and wellbeing. Most of us learn to live with problems that never seem serious enough to bring to a doctor. I want to feel at my best as often as possible, with the kind of care a professional athlete gets from the team around them, or that expensive concierge medicine sells. I can't get all the way there yet.</p>
+<p>I've raised my expectations for my health and wellbeing. Most of us learn to live with problems that never seem serious enough to bring to a doctor. I want to feel at my best as often as possible, with the kind of care a professional athlete gets from the team around them. I can't hire that team, so I'm building the parts of it I can.</p>
 <p>I've started with a personal health record I own, bringing together the evidence that my AI advisors and I need to work from a fuller picture of me. I'm now investigating symptoms I'd lived with for years and had come to accept as normal.</p>
 </div>
 
 <h2>The nine-year-old scan</h2>
 
-<p>In August, my doctor told me that my ferritin and rheumatoid factor were still elevated, and he didn't have a clean explanation for either. He ordered a liver elastography, a scan that measures fat and stiffness in the liver. That surprised me. I rarely drink, I'm lean and active. I wasn't trying to rule it out but I wanted to know whether I already had evidence that could put that question in my specific context. Nine years ago I'd had a whole-body MRI done, and I vaguely remembered that it said something about my liver. Was anything in there relevant?</p>
+<p>In August, my doctor told me that my ferritin and rheumatoid factor were still elevated, and he didn't have a clean explanation for either. He ordered a liver elastography, a scan that measures fat and stiffness in the liver. That surprised me. I rarely drink, I'm lean and active. I wasn't trying to rule out a liver problem but I wanted to know whether I already had evidence that could put it in my specific context. Nine years ago I'd had a whole-body MRI done, and I vaguely remembered that it said something about my liver. Was anything in there relevant?</p>
 
-<p>I asked the agent that runs my Personal Health Record, and two minutes later I had that prior evidence. The December 2017 scan had looked at my liver and put liver fat at 2 percent, with anything under 4 percent counted as normal. Usefully, I also got the following caveats: the scan is nine years old, it wasn't elastography, it never measured stiffness, and it couldn't rule out anything that developed since. In other words, the old result didn't make the new scan unnecessary. I then asked for a short note for my doctor along with the relevant data for review. The agent built that document, which I sent directly to the doctor.</p>
+<p>I asked the agent that runs my personal health record, and two minutes later I had that prior evidence. The December 2017 scan had looked at my liver and put liver fat at 2 percent, with anything under 4 percent counted as normal. It also came with caveats: the scan is nine years old, it wasn't elastography, it never measured stiffness, and it couldn't rule out anything that developed since. In other words, the old result didn't make the new scan unnecessary. I then asked for a short note for my doctor along with the relevant data for review. The agent built that document, which I sent directly to the doctor.</p>
 
 <div class="artifact">
 <p class="src"><span>from the session log · doctor's name redacted</span><span class="date">Aug 16–17, 2026</span></p>
@@ -115,11 +115,11 @@ figure.flagship{max-width:696px}
 
 <h2>One folder: originals below, views above</h2>
 
-<p>The Personal Health Record is one folder on my laptop. The bottom half is a vault: every original health file I've been able to get my hands on, kept exactly as I received it. That includes lab reports, imaging, my genome, wearable exports, and messages from my doctor. The top half is a reading room: summaries, trend lines, and one file per health topic (blood work, genomics, and so on), all generated from the vault. The originals never change, and the disposable views get regenerated whenever I check in a new record or improve the procedure that builds them.</p>
+<p>The personal health record is one folder on my laptop. The bottom half is a vault: every original health file I've been able to get my hands on, kept exactly as I received it. That includes lab reports, imaging, my genome, wearable exports, and messages from my doctor. The top half is a reading room: summaries, trend lines, and one file per health topic (blood work, genomics, and so on), all generated from the vault. The originals never change, and the disposable views get regenerated whenever I check in a new record or improve the procedure that builds them.</p>
 
 <aside class="note"><div><p class="label">§ accession</p><p>An accession number is the permanent ID an archive gives an item the moment it's accepted into the collection.</p></div></aside>
 
-<p>There's almost no code in the record. It runs on three plain formats, YAML for the catalog cards, Markdown for the views, and SHA-256 checksums for the files, plus a set of written procedures. I run the record with Claude Code or Codex, which let a model read and modify files on my computer, so I can give it written procedures instead of building an application. The procedures don't depend on which model reads them. When I say "check this file in," an agent session runs the check-in procedure: assign the next accession number,<span class="fn">§</span> wrap the file in a catalog card that records where it came from and when, checksum it, and regenerate whatever views it touches. Git records every change to the text, and checksums reveal if the bytes in an original file ever change. Because the folder is my medical history, it has no git remote and doesn't live in a synced folder. That's written into the agent's operating rules as a cardinal rule, right after "never modify anything in the vault."</p>
+<p>There's almost no code in the record. It runs on three plain formats, YAML for the catalog cards, Markdown for the views, and SHA-256 checksums for the files, plus a set of written procedures. I run the record with Claude Code or Codex, which let a model read and modify files on my computer, so I can give it instructions in plain English instead of building an application. The procedures don't depend on which model reads them. When I say "check this file in," an agent session runs the check-in procedure: assign the next accession number,<span class="fn">§</span> wrap the file in a catalog card that records where it came from and when, checksum it, and regenerate whatever views it touches. Git records every change to the text, and checksums reveal if the bytes in an original file ever change. Because the folder is my medical history, it has no git remote and doesn't live in a synced folder. That's written into the agent's operating rules as a standing rule, right after "never modify anything in the vault."</p>
 
 <figure class="diagram">
 <div class="pan"><svg viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" role="img" aria-label="Inputs flow through a check-in procedure into a vault of originals and a reading room of regenerated views; answers, exports, and other advisors read from the reading room, and every view keeps a link back down to the vault.">
@@ -195,7 +195,7 @@ figure.flagship{max-width:696px}
 
 <aside class="note"><div><p class="label">* archival lineage</p><p>The borrowed principle is that capture is the only unrepeatable event. Processing can be deferred, and redone, forever.</p></div></aside>
 
-<p>None of this design is original.<span class="fn">*</span> Archives assigned accession numbers before software existed. Libraries keep the closed stacks apart from the reading room. The Library of Congress checksums its collections. I explained it to a friend this way: you always keep the primary sources, the primary sources sit at the bottom, you build derived data on top, and you keep a way to connect every claim and every insight back to the original it came from.</p>
+<p>None of this design is meant to be original.<span class="fn">*</span> Archivists worked out how to keep records long before software existed, and I'd rather borrow what works than invent something new. Archives assign accession numbers. Libraries keep the closed stacks apart from the reading room. The Library of Congress checksums its collections. I explained it to a friend this way: you always keep the primary sources, they sit at the bottom, you build derived data on top, and you keep a way to connect every claim and every insight back to the original it came from.</p>
 
 <div class="artifact">
 <p class="src"><span>vault/2026/2026-0030/envelope.yaml</span><span class="date">verbatim, trimmed</span></p>
@@ -216,7 +216,7 @@ notes: "Whole-body MRI (mid-thigh) report. <span class="cut">[&hellip;]</span> e
      detail: "migrated via procedures/migration.md"}</span></pre>
 </div>
 
-<p>That catalog card is what connects the answer about my liver to its citation. The [2026-0030] at the end of the agent's message is an accession number. Follow it and you get the card. The card sits next to the original PDF, byte for byte what Health Nucleus handed me in 2017. Notice the card is already arguing with itself about dates, because the PDF's metadata says 2021 and the filename says 2017, and it wrote down which one to believe and why. Yay metadata.</p>
+<p>That catalog card is what connects the answer about my liver to its citation. The [2026-0030] at the end of the agent's message is an accession number. Follow it and you get the card. The card sits next to the original PDF, byte for byte what Health Nucleus handed me in 2017. Notice the card is already arguing with itself about dates, because the PDF's metadata says 2021 and the filename says 2017, and the agent wrote down which one to believe and why. Yay metadata.</p>
 
 <figure class="diagram">
 <div class="pan"><svg viewBox="0 0 640 110" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" role="img" aria-label="Chain: original file, accession with checksum, reading-room view, cited answer. Every value walks back to the file it came from.">
@@ -246,26 +246,26 @@ notes: "Whole-body MRI (mid-thigh) report. <span class="cut">[&hellip;]</span> e
 <figcaption>End-to-end provenance for the liver scan</figcaption>
 </figure>
 
-<aside class="note"><div><p class="label">† the one rule, precisely</p><p>Payload bytes, IDs, and manifests never change. A catalog card can be corrected, but only by appending an audit event that says what changed and why. Abandoned check-ins with no card get swept.</p></div></aside>
+<aside class="note"><div><p class="label">† the one rule, precisely</p><p>Original files, IDs, and checksums never change. A catalog card can be corrected, but only by appending an audit event that says what changed and why.</p></div></aside>
 
-<p>The record launched on June 10 with 39 artifacts and holds 48 as I write this. Every file was checksum-verified at launch, and every new file is verified on the way in.<span class="fn">†</span> The point of holding the files, instead of a login to each place they live, is durability. Data available only through someone else's portal can't be a foundation I control. Access can disappear but I retain possession. Data sovereignty starts with a folder I own, containing the original files. The reading room can be wrong and get rebuilt. The vault is the part nobody else can revoke or lose.</p>
+<p>Every file was checksum-verified when the record launched in June, and every new file is verified on the way in.<span class="fn">†</span> The point of holding the files, instead of a login to each place they live, is durability. Data available only through someone else's portal can't be a foundation I control. Access can disappear but I retain possession. Data sovereignty starts with a folder I own, containing the original files. The reading room can be wrong and get rebuilt. The vault is the part nobody else can revoke or lose.</p>
 
 <details class="unfold">
 <summary>building this yourself</summary>
-<p>If you want to copy this approach, these are the eight key steps. 1) Preserve the original files untouched. 2) Give each accepted file a stable ID and a card that records where it came from. 3) Verify integrity with checksums. 4) Generate replaceable views instead of editing originals. 5) Link every extracted claim back to its source. 6) Record corrections as supersessions, never as rewrites. 7) Give the agent written procedures for check-in, retrieval, and what to do when it doesn't know. 8) Back up, and test the restore. I wrote a plain-language walkthrough for a friend that covers the rest; you can reach out if you want it, or I'll eventually put it on GitHub.</p>
+<p>If you want to copy this approach, these are the eight steps. 1) Preserve the original files untouched. 2) Give each accepted file a stable ID and a card that records where it came from. 3) Verify integrity with checksums. 4) Generate replaceable views instead of editing originals. 5) Link every extracted claim back to its source. 6) Record corrections as new entries that supersede the old, never as rewrites. 7) Give the agent written procedures for check-in, retrieval, and what to do when it doesn't know. 8) Back up, and test the restore (the step I haven't finished myself). I wrote a plain-language walkthrough for a friend that covers the rest; you can reach out if you want it, or I'll eventually put it on GitHub.</p>
 </details>
 
 <h2>Nobody is watching the whole picture of you</h2>
 
-<p>My health history is spread across a half-dozen health systems, and in some cases you have to pay to get copies of your own records. Care is organized around specific encounters and the immediate clinical question, not maintaining a complete picture of me over time. Each clinician sees what their system contains and what I remember to bring. A persistent problem that isn't dangerous struggles for sustained attention without sustained pressure. No one is responsible for integrating my history across providers, devices, and years. In practice that job falls to me.</p>
+<p>My health history is spread across a half-dozen health systems, and in some cases you have to pay to get copies of your own records. Care is organized around specific encounters and the immediate clinical question, not maintaining a complete picture of me over time. Each clinician sees what their system contains and what I remember to bring. A problem that's persistent but not dangerous doesn't get sustained attention unless I keep pushing for it. No one is responsible for integrating my history across providers, devices, and years. In practice that job falls to me.</p>
 
-<p>We also learn, and are socialized, to put up with persistent aches, bad sleep, and generally feeling unwell. Who do you complain to that could help? You're not a doctor. What do you know? So you learn to live with it, and a pain in your foot becomes a limp, and a limp becomes a lifelong compensation, with no one watching over you. I've written about <a href="what-are-you-actually-solving.html">step zero</a>, confirming what the problem actually is before you work on it. A fifteen-minute preventative appointment with a physician won't run step zero on your life.</p>
+<p>We also learn, and are socialized, to put up with persistent aches, bad sleep, and generally feeling unwell. Who do you complain to that could help? You're not a doctor. What do you know? So you learn to live with it, and a pain in your foot becomes a limp, and a limp becomes a lifelong compensation. I've written about <a href="what-are-you-actually-solving.html">step zero</a>, confirming what the problem actually is before you work on it. A fifteen-minute preventative appointment with a physician won't run step zero on your life.</p>
 
-<p>This spring I ran a large direct-to-consumer blood panel through Function Health. The testing itself is comprehensive. The analysis layer on top, however, read like someone had spent thirty seconds on it. There were a few warnings, and no attempt to make sense of the broader picture as it pertains to my goals and current situation. The sense-making is the hard part.</p>
+<p>This spring I ran a large direct-to-consumer blood panel through Function Health. The testing itself is comprehensive. The analysis layer on top, however, read like someone had spent thirty seconds on it. There were a few warnings, and no attempt to make sense of the broader picture against my goals and current situation. The sense-making is the hard part.</p>
 
-<p>My annual physical in July is a concrete example. I'd been working through some symptoms with another advisor and I wasn't sure how to proceed. The health advisor helped me identify the three relevant questions to take to my physical, along with backing evidence from the record. Based on that evidence, my doctor ordered workups on all three and added an additional test. Without that back-and-forth, the appointment would have been a lost opportunity. The results came back into the record, and that's where the ferritin workup at the top of this piece started.</p>
+<p>My annual physical in July is a concrete example of what sense-making looks like. I'd been working through some symptoms with one of my other AI advisors and I wasn't sure how to proceed. The health advisor, the one that reads the record, helped me identify the three relevant questions to take to my physical, along with backing evidence. Based on that evidence, my doctor ordered workups on all three and added a fourth. Without that back-and-forth, the appointment would have been a lost opportunity. The results came back into the record, and that's where the ferritin workup at the top of this piece started.</p>
 
-<p>So if the jobs of integrating and sensemaking are mine, what does the record have to do? As you've just seen, the first requirement is that it has to hold the actual files, in my custody. The other four are harder. It has to give every signal a place to meet. It has to treat me as a process, not a snapshot. It has to keep representations above the evidence, because the evidence is outgrowing what any person can read. And it has to say only what the evidence supports.</p>
+<p>So if the jobs of integrating and sense-making are mine, what does the record have to do? The first requirement is that it has to hold the actual files, in my custody. The other four are harder. It has to give every signal a place to meet. It has to treat me as a process, not a snapshot. It has to keep representations above the evidence, because the evidence is outgrowing what any person can read. And it has to say only what the evidence supports.</p>
 
 <h2>Every signal needs a place to meet</h2>
 
@@ -298,7 +298,9 @@ notes: "Whole-body MRI (mid-thigh) report. <span class="cut">[&hellip;]</span> e
 
 <p>A blood pressure taken once a year at the doctor's office is one reading, in one setting, on one day, after you drove there and sat in the waiting room. It's a fact, but it isn't a picture. Your heart rate in bed and your heart rate after climbing the stairs to the office are two very different numbers from the same body. A blood panel doesn't know where in a woman's cycle she was. We collect a few isolated points about a person and then reason from them as if they were a complete picture.</p>
 
-<p>The record needs to keep the conditions with the value. We don't want just a number, but the number on this date, fasting or not, after this kind of week, on this medication. A lab report tells you whether a result is inside the reference range. That doesn't tell me how the result compares with my own history or goals. Population benchmarks have limits. Lab ranges differ by institution. Function Health flagged a lipid result that my doctor reads as fine. Other population benchmarks are built from coarse measures designed for populations, not individuals. BMI doesn't distinguish muscle from fat. Mine is 27, which the chart labels overweight, and the body-composition tests in the same record show why that label is misleading. A clinically acceptable result may still be far from my target.</p>
+<p>The record needs to keep the conditions with the value. I don't want just a number, but the number on this date, fasting or not, after this kind of week, on this medication. A lab report tells you whether a result is inside the reference range. That doesn't tell me how the result compares with my own history or goals.</p>
+
+<p>Population benchmarks have limits. Lab ranges differ by institution. Function Health flagged a lipid result that my doctor reads as fine. Other benchmarks are built from coarse measures designed for groups, not individuals. BMI doesn't distinguish muscle from fat. Mine is 27, which the chart labels overweight, and the body-composition tests in the same record show why that label is misleading. A clinically acceptable result may still be far from my target.</p>
 
 <p>Your own baseline is a different kind of reference. A high-level endurance athlete can have a resting heart rate low enough to alarm an emergency room, and against the population it looks abnormal. Against their own history it's expected. So the record needs three reference points. The population range says what's unusual across people. My own history says what's unusual for me. And my current target is a reference point nobody keeps for me.</p>
 
@@ -334,19 +336,19 @@ notes: "Whole-body MRI (mid-thigh) report. <span class="cut">[&hellip;]</span> e
 
 <h2>We are still measuring too little</h2>
 
-<p>The obvious fix for snapshots is to measure more often. And the corresponding objection is that you end up hoarding data you never use, which is half right. More data is not automatically more knowledge. It can create noise, false patterns, and more material than anyone can interpret. But precision isn't the only thing that makes data useful. A slightly noisy measurement taken every day can tell you more about a changing person than a precise measurement taken once a year. The stream establishes a baseline, shows direction, and makes departures from normal visible. A continuous glucose trace isn't wasted data lying around. One fasting number a year tells you where you were that morning. The trace shows how you respond to a meal, and whether that response is changing.</p>
+<p>The obvious fix for snapshots is to measure more often. The objection is that you end up hoarding data you never use, which is half right. More data is not automatically more knowledge. It can create noise, false patterns, and more material than anyone can interpret. But precision isn't the only thing that makes data useful. A slightly noisy measurement taken every day can tell you more about a changing person than a precise measurement taken once a year. The stream gives you a baseline and a direction, and it makes departures from your normal visible. One fasting number a year tells you where you were that morning. A continuous glucose trace shows how you respond to a meal, and whether that response is changing.</p>
 
-<p>We don't yet know which streams will matter. Some cheap, consistent measurements will turn out to reveal changes nobody knew to look for, and most such experiments will produce nothing. Where collection is cheap and low-risk, preserve more. Keep the irreplaceable raw evidence. For routine streams, extract the durable patterns, then compact or prune the rest under explicit rules. Collection shouldn't be random. The system I want would identify a measurement that's cheap to get and likely to matter, then ask for it next.</p>
+<p>We don't yet know which streams will matter. Some cheap, consistent measurements will turn out to reveal changes nobody knew to look for, and most such experiments will produce nothing. Where collection is cheap and low-risk, I keep more. The raw evidence that can't be recollected stays. For routine streams, I extract the durable patterns and prune the rest under written rules. Collection shouldn't be random. The system I want would identify a measurement that's cheap to get and likely to matter, then ask for it next.</p>
 
 <aside class="note"><div><p class="label">‡ the wager</p><p>The wager I take from Rich Sutton's <a href="https://www.cs.utexas.edu/~eunsol/courses/data/bitter_lesson.pdf">Bitter Lesson</a> is not that data automatically becomes knowledge. It's that we repeatedly underestimate what scalable methods can extract once enough data exists.</p></div></aside>
 
-<p>Health records were designed for sparse snapshots. Dense longitudinal streams need machinery that can preserve and compress them without losing provenance. That machinery also has to compare them against your baseline and make them interpretable. The layers above the vault are meant to do that. There's one more reason to collect more data. A model can only reason about the data it's given, and right now every model meets me with almost no context about me. Much of what I'm doing here is making myself legible to systems that are dramatically increasing in capability.<span class="fn">‡</span></p>
+<p>Health records were designed for sparse snapshots. Continuous streams need machinery that can preserve and compress them without losing provenance. That machinery also has to compare them against your baseline and make them interpretable. The reading room is meant to do that. There's one more reason to collect more data. A model can only reason about the data it's given, and right now every model meets me with almost no context about me. Much of what I'm doing here is making myself legible to systems that get more capable every few months.<span class="fn">‡</span></p>
 
 <h2>The record is outgrowing what a person can read</h2>
 
-<p>For most of medical history the picture of a person was whatever a clinician could collect and hold in their head. A blood pressure, a panel, a note, an image reduced to a paragraph of radiology report. That model of a health record no longer fits the volume of data we can collect. If you wear an Oura ring, you generate a stream. A continuous glucose monitor turns one annual number into a curve. A full-resolution imaging study is a few gigabytes. A genome is over a hundred. Nobody can read or reason about the raw, unprocessed stream.</p>
+<p>For most of medical history the picture of a person was whatever a clinician could collect and hold in their head. A blood pressure, a panel, a note, an image reduced to a paragraph of radiology report. That model of a health record no longer fits the volume of data we can collect. If you wear an Oura ring, you generate a stream. A continuous glucose monitor turns one annual number into a curve. A full-resolution imaging study is a few gigabytes. A genome is over a hundred. Nobody can read or reason about the raw stream.</p>
 
-<p>My genome made this concrete. It arrived as 109.55 GiB of raw sequencing files. The check-in procedure vaulted them untouched and never opened them again. The analysis used the 91 MiB variant file and a gigabyte of local scratch space. Nothing was uploaded. It produced seven reports whose conclusion, for the variants they could analyze, was that none justified a claim about my health.</p>
+<p>My genome made this concrete. It arrived as 109.55 GiB of raw sequencing files. The check-in procedure put them in the vault untouched and never opened them again. The analysis used the 91 MiB variant file and a gigabyte of local scratch space. Nothing was uploaded. I ended up with seven reports whose conclusion, for the variants they could analyze, was that none justified a claim about my health.</p>
 
 <div class="artifact">
 <p class="src"><span>from the genome session</span><span class="date">Aug 22, 2026</span></p>
@@ -356,7 +358,7 @@ notes: "Whole-body MRI (mid-thigh) report. <span class="cut">[&hellip;]</span> e
 <p>Yes: for the part we analyzed, no news is good news. <span class="cut">[&hellip;]</span> The long report feels empty because responsible genomic interpretation contains a lot of "this does not justify a conclusion."</p></div>
 </div>
 
-<p>I'd rather get no conclusion than have a system make one up to sound useful. The genome also shows the shape of the answer to "too big to read." At the bottom are the raw reads. Above them is the variant file, a thousandth the size, which discards detail to become usable. Annotated reports sit above that, followed by a view for one specific question and then a decision. Each layer becomes more useful for a particular question while keeping a link to the evidence below it. Imaging is starting to take the same shape. The raw images behind that 2017 MRI report arrived at the end of August, 466 MB of DICOM files, checked in next to the two-page report.</p>
+<p>I'd rather get no conclusion than have a system make one up to sound useful. The genome also shows how to handle a record that's too big to read. At the bottom are the raw reads. Above them is the variant file, a thousandth the size, which discards detail to become usable. Annotated reports sit above that, followed by a view for one specific question and then a decision. Each layer becomes more useful for a particular question while keeping a link to the evidence below it. Imaging is starting to take the same shape. The raw images behind that 2017 MRI report arrived at the end of August, 466 MB of DICOM files, checked in next to the two-page report.</p>
 
 <figure class="diagram">
 <div class="pan"><svg viewBox="0 0 640 236" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" role="img" aria-label="Five stacked layers, widest at the bottom: high-fidelity source, durable intermediate, concern-specific view, interpretation, decision. Each keeps a link to the layer below.">
@@ -393,13 +395,13 @@ notes: "Whole-body MRI (mid-thigh) report. <span class="cut">[&hellip;]</span> e
 <figcaption>The representation stack, using the genome as the example</figcaption>
 </figure>
 
-<p>My representations are crude, and I'm not claiming the ones I built are the complete answer. The principle I'm confident in is to preserve high-fidelity evidence below and produce selective, replaceable views above it without confusing the view for the record.</p>
+<p>My representations are crude, and they aren't the complete answer. The principle I'm confident in is to preserve high-fidelity evidence below and produce selective, replaceable views above it without confusing the view for the record.</p>
 
 <h2>It has to say only what the evidence supports</h2>
 
-<p>More data doesn't give you certainty. Most of the time, the evidence isn't enough to settle the question. Cases where one gene decides it are rare. Mostly you're weighing incomplete evidence and making the smartest call you can within your given context. The record gives me more evidence, better arranged, with the gaps marked. It helps me make better decisions without pretending the uncertainty has gone away.</p>
+<p>More data doesn't give you certainty. Most of the time, the evidence isn't enough to settle the question. Cases where one gene decides it are rare. Usually you're weighing incomplete evidence and making the smartest call you can within your context. The record gives me more evidence, better arranged, with the gaps marked. It helps me make better decisions without pretending the uncertainty has gone away.</p>
 
-<p>That discipline has to be built into the routine work, not just the answers, because most of what the record says later comes from what got extracted at check-in. When my annual exam was checked in this July, the agent wrote a log of what it did and didn't extract.</p>
+<p>Saying only what the evidence supports has to be built into the routine work, not just the answers, because most of what the record says later comes from what got extracted at check-in. When my annual exam was checked in this July, the agent wrote a log of what it did and didn't extract.</p>
 
 <div class="artifact">
 <p class="src"><span>ops/runs/2026-07-28-extraction-2026-0040.md · verbatim, trimmed</span><span class="date">Jul 28, 2026</span></p>
@@ -424,16 +426,16 @@ notes: "Whole-body MRI (mid-thigh) report. <span class="cut">[&hellip;]</span> e
   completed results.</strong></pre>
 </div>
 
-<p>Left to itself, a model will fill in a missing result or count the same lab twice. It's important to guard against those kinds of errors by tracking extraction decisions. This doesn't prevent every mistake, but it helps to recover from them.</p>
+<p>Left to itself, a model will fill in a missing result or count the same lab twice. Writing down each extraction decision guards against those errors. The log doesn't prevent every mistake, but it makes them recoverable.</p>
 
 <p>Together, those five requirements make the record a foundation I can build on.</p>
 
 <h2>A record that gets better with use</h2>
 
-<p>Each new file extends the evidence. Each question exposes what's missing. When I correct a procedure, the correction becomes a standing rule. Better models provide a second source of improvement. Because the original artifacts weren't flattened into somebody else's schema, a new model can reread the same evidence and produce a better view. New models arrive every few months. Most software stays exactly as capable as the day you bought it until someone rebuilds it. This one gets better the more I use it.</p>
+<p>Each new file extends the evidence. Each question exposes what's missing. When I correct a procedure, the correction becomes a standing rule. Better models are the second source of improvement. Because the original files weren't flattened into somebody else's schema, a new model can reread the same evidence and produce a better view. New models arrive every few months. Most software stays exactly as capable as the day you bought it until someone rebuilds it. The record gets better the more I use it, and it gets better when the models do.</p>
 
 <figure class="diagram">
-<div class="pan"><svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" role="img" aria-label="Loop one: more use, more context, better views, better decisions, and back to more use. Loop two: a new model or harness re-reads the same preserved evidence and produces better views and answers, and the next model does it again.">
+<div class="pan"><svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" role="img" aria-label="Loop one: more use, more context, better views, better decisions, and back to more use. Loop two: a new model re-reads the same preserved evidence and produces better views and answers, and the next model does it again.">
   <text x="4" y="12" font-size="9" fill="#8f887a" font-style="italic">loop one · use</text>
   <g stroke="#c9bfa8" fill="#fcf8ee">
     <rect x="4" y="20" width="120" height="30" rx="2"/>
@@ -472,30 +474,30 @@ notes: "Whole-body MRI (mid-thigh) report. <span class="cut">[&hellip;]</span> e
   <text x="180" y="166" font-size="8.5" fill="#b07a34" font-style="italic">the next model, same preserved evidence, every few months</text>
   <text x="4" y="192" font-size="8.5" fill="#8f887a" font-style="italic">the originals never change, so every new model gets a fresh pass at all of them</text>
 </svg></div>
-<figcaption>The two loops. I drive the first; model and harness builders drive the second</figcaption>
+<figcaption>The two loops. I drive the first; model builders drive the second</figcaption>
 </figure>
 
 <h2>The foundation the 2014 advisor was missing</h2>
 
-<p>I've been thinking about this problem since at least 2014, when I published a short piece called <a href="https://medium.com/@favrot/building-a-compass-out-of-tea-leaves-a3f7352bea8e">Building a compass out of tea leaves</a>. The argument was that we make health decisions every day with almost no guidance, that the professional guidance we do get is episodic and blurry, and that what we needed was an advisor layer combining expert knowledge, lots of data, and human judgment. It named three problems: every expert is limited by what they know, there's more relevant knowledge than any one person can sift through, and it's hard to find the action with the most leverage. It opened with a nurse reading my blood pressure at an annual screening and ended with me admitting I still didn't know what to do with those two numbers.</p>
+<p>I've been thinking about this problem since at least 2014, when I published a short piece called <a href="https://medium.com/@favrot/building-a-compass-out-of-tea-leaves-a3f7352bea8e">Building a compass out of tea leaves</a>. The argument was that we make health decisions every day with almost no guidance, that the professional guidance we do get is episodic and blurry, and that what we needed was an advisor combining expert knowledge, lots of data, and human judgment. It named three problems: every expert is limited by what they know, there's more relevant knowledge than any one person can sift through, and it's hard to find the action with the most leverage. It opened with a nurse reading my blood pressure at an annual screening and ended with me admitting I still didn't know what to do with those two numbers.</p>
 
-<p>A model can now surface useful evidence across a personal record quickly enough to make that advisor practical. My <a href="fitness-advisor.html">fitness advisor</a> is one example. What I missed in 2014 is what has to sit underneath it. An advisor can't integrate evidence it can't access or see a trend without history. If the original is gone, it can't revise an interpretation. And it shouldn't sound more certain than the record allows. The advisor I imagined in 2014 needed a foundation.</p>
+<p>A model can now surface useful evidence across a personal record quickly enough to make that advisor practical. My <a href="fitness-advisor.html">fitness advisor</a> is one example. What I missed in 2014 is what has to sit underneath it. An advisor can't integrate evidence it can't access or see a trend without history. If the original is gone, it can't revise an interpretation. And it shouldn't sound more certain than the record allows.</p>
 
 <h2>Isn't this terrible privacy practice?</h2>
 
 <p>I've been feeding my medical records and my genomic data through commercial AI systems. Isn't that a terrible idea? Maybe.</p>
 
-<p>My records were already scattered across portals, labs, and insurers, under agreements I never read, so the alternative wasn't fully private either. But consolidating them isn't free, and there are two separate risks. Consolidation gives me custody and makes the record usable, while increasing the consequences of a local compromise. Using hosted models adds a separate exposure to providers whose policies I don't control. I've decided those risks are worth the value for me, with safeguards, and I'm still working out better ones.</p>
+<p>My records were already scattered across portals, labs, and insurers, under agreements I never read, so the alternative wasn't fully private either. But consolidating them isn't free, and there are two separate risks. Consolidation gives me custody and makes the record usable, while increasing the consequences of a local compromise. Using hosted models adds an exposure to providers whose policies I don't control. I've decided those risks are worth it for me, with safeguards, and I'm still working out better ones.</p>
 
-<p>Here is how I handle those risks now. The repository as a whole never leaves my machine. It has no remote or cloud sync. Selected derived views do leave the machine. For a given question, an agent session sends the relevant topic and trend files to a hosted model, not the vault. The genome work ran locally and never uploaded a read. I have turned off model training on both of my personal AI accounts. For Claude, that puts me under <a href="https://www.anthropic.com/news/updates-to-our-consumer-terms">its 30-day retention policy</a>.</p>
+<p>Here is how I handle those risks now. The record as a whole never leaves my machine. It has no remote or cloud sync. For a given question, an agent session sends the relevant topic and trend files to a hosted model, not the vault. The genome work ran locally and never uploaded a read. I've turned off model training on both of my personal AI accounts. For Claude, that puts me under <a href="https://www.anthropic.com/news/updates-to-our-consumer-terms">its 30-day retention policy</a>.</p>
 
-<p>The preservation and security layer of the record is unfinished. That isn't a reason to leave everything scattered across systems that don't connect and don't serve you. Secure backup and tested recovery are the next layer of work, before the record grows further. And it's a fair argument that this shouldn't be a hobbyist's job at all.</p>
+<p>The preservation and security layer of the record is unfinished. That isn't a reason to leave everything scattered across systems that don't connect and don't serve you. Secure backup and tested recovery come next, before the record grows further. And it's a fair argument that this shouldn't be a hobbyist's job at all.</p>
 
 <h2>What it costs to run</h2>
 
-<p>Aside from the cost to run the models, the biggest cost is my attention to run and develop the record and the advisors on top of it. I'm the user, the systems integrator, the data operator, the product designer, the health interpreter, the LLM operator, and the bullshit detector. This requires a bit of data engineering, a little systems thinking, some knowledge of how a body works, and enough technical depth to run it all. It isn't an app, and it isn't usable by a random person.</p>
+<p>Aside from the cost of the models, the biggest cost is the attention it takes to operate and develop the record and the advisors on top of it. I'm the user, the systems integrator, the data operator, the product designer, the health interpreter, the LLM operator, and the bullshit detector. This requires a bit of data engineering, a little systems thinking, some knowledge of how a body works, and enough technical depth to run it all. It isn't an app, and it isn't usable by most people.</p>
 
-<p>The deepest failure mode took me a while to see. As models get stronger, their explanations get more plausible whether or not they're correct. If I can't evaluate those explanations, I lose the human-in-the-loop safeguard and become dependent on the model. I end up approving conclusions I no longer understand. In August, another advisor reading the health record treated an old blood-count question as unresolved.</p>
+<p>The deepest failure mode took me a while to see. As models get stronger, their explanations get more plausible whether or not they're correct. If I can't evaluate those explanations, I stop being a check on the model and become dependent on it. I end up approving conclusions I no longer understand. In August, one of my other AI advisors, reading the health record, treated an old blood-count question as unresolved.</p>
 
 <div class="artifact">
 <p class="src"><span>another advisor's files · the error, the correction, the rule · names redacted</span><span class="date">Aug 14–28, 2026</span></p>
@@ -517,16 +519,16 @@ has carried an item as open that Laurence had already closed.</strong>
 
 <p>The machinery worked as designed. The error remains in the log, and the correction is dated. But the correction only happened because I remembered the appointment well enough to challenge a plausible story with a clean citation. Someone who couldn't evaluate that story might have accepted it.</p>
 
-<p>The next version has to be designed for discernment, not approval. Observations, interpretations, recommendations, and actions stay separate. Source evidence is always attached to a claim. Missing evidence and competing explanations get surfaced instead of smoothed over. The next version also has to recognize when a question exceeds both its competence and mine, then route it to an expert or a more appropriate system. Productization is not merely adding a friendly interface. It means encoding much of the missing operational expertise while preserving the individual's ability to understand, question, and override the system.</p>
+<p>The next version has to be designed for supporting discernment, not requesting approval. That means keeping observations, interpretations, recommendations, and actions separate, so I can see which is which. It also has to recognize when a question exceeds both its competence and mine, and route it to an expert or another system. Turning this into a product isn't just adding a friendly interface. It means building in the expertise I currently supply by hand, without taking away the person's ability to understand, question, and override the system.</p>
 
-<p>Here are the unfinished parts, concretely. Custody is fragile because the record lives on one machine and independent recovery isn't complete. The vault holds two continuous-glucose exports, but most of my wearable history, including Oura and Apple Health, isn't in it yet. The representations are crude. The current record answers when I ask and does nothing on its own, so there's no proactivity or discoverability yet. Interpretation can be wrong even with perfect provenance. And there's no clinician directly in the loop. I'm relying heavily on the models plus my judgment.</p>
+<p>The unfinished parts: custody is fragile because the record lives on one machine and independent recovery isn't complete. Most of my wearable history, including Oura and Apple Health, isn't in it yet. The representations are crude. The current record answers when I ask but does nothing on its own, so it never raises anything by itself. Interpretation can be wrong even with perfect provenance. And there's no clinician directly in the loop. I'm relying heavily on the models plus my judgment.</p>
 
 <h2>What gets built on the foundation</h2>
 
-<p>The Personal Health Record is the evidence and the representations. The personal health system is the whole loop around it: the record, the agents and advisors that use it, me, my doctors, the decisions we make, and the new evidence those decisions produce. The agent operates on the record. It isn't the record, and it isn't the judgment.</p>
+<p>The personal health record is the evidence and the representations. The personal health system is the whole loop around it: the record, the agents and advisors that use it, me, my doctors, the decisions we make, and the new evidence those decisions produce. The agent operates on the record. It isn't the record, and it isn't the judgment.</p>
 
 <figure class="diagram flagship">
-<div class="pan"><svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" role="img" aria-label="A loop. Sources, observations, and measurements feed the Personal Health Record, which holds a vault of original evidence and a reading room of usable representations. An advisor or agent session raises a question, an uncertainty, or an option. Laurence, and when it matters a clinician, exercise judgment. An action, measurement, or observation produces new evidence, which returns to the top. The record is the evidence and representations; the personal health system is the whole loop.">
+<div class="pan"><svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" role="img" aria-label="A loop. Sources, observations, and measurements feed the personal health record, which holds a vault of original evidence and a reading room of usable representations. An advisor or agent session raises a question, an uncertainty, or an option. Judgment is mine, and a clinician's when it matters. An action, measurement, or observation produces new evidence, which returns to the top. The record is the evidence and representations; the personal health system is the whole loop.">
   <g stroke="#c9bfa8" fill="#fcf8ee" stroke-width="1.2">
     <rect x="170" y="12" width="330" height="36" rx="3"/>
     <rect x="170" y="74" width="330" height="96" rx="3" stroke="#b07a34" stroke-width="1.8"/>
@@ -580,7 +582,7 @@ has carried an item as open that Laurence had already closed.</strong>
 <figcaption>From evidence to action and back</figcaption>
 </figure>
 
-<p>The capabilities I want are all points on that loop. A front page that makes the current state legible, so I get a briefing on the parts of my health most relevant to my goals right now. Personal baselines, so meaningful change is detectable. A doctor-visit loop that carries my reasoning in and captures the clinician's judgment coming out. Translation at the edges, so the record can take in whatever a provider sends and emit whatever a clinician's system expects, with real validation on the way out, instead of everyone first agreeing on one schema. And long-term custody, so the loop survives changes of provider, model, and eventually me, and serves my kids.</p>
+<p>The capabilities I want are all points on that loop. The first is a front page for the record, a summary that tells me which parts of my health matter most for my goals right now, instead of making me ask. The second is personal baselines, so that meaningful change is detectable against my own history rather than a population range. The third is a doctor-visit loop that carries my reasoning into the appointment and captures the clinician's judgment coming out. The fourth is translation at the edges, so the record can take in whatever a provider sends and emit whatever a clinician's system expects, with real validation on the way out, instead of everyone first agreeing on one schema. And the last is long-term custody, so the loop survives changes of provider and model, and eventually outlives me, since my history is part of my kids' history too.</p>
 
 <div class="artifact">
 <p class="src"><span>where each layer actually stands</span><span class="date">Sep 2026</span></p>
@@ -598,11 +600,11 @@ translation at the edges                      long-term
 outlives me                                   long-term</pre></div>
 </div>
 
-<p>Some products already recommend when to repeat a standard panel or suggest a follow-up test. What I haven't found is one that looks across the whole record and identifies the uncertainty most worth reducing. It would then tell you which next measurement would most improve the picture. My fitness advisor already answers a similar question. What's the highest-value thing I can do with the next 30 minutes? The next version will apply that question to the health record.</p>
+<p>Some products already recommend when to repeat a standard panel or suggest a follow-up test. What I haven't found is one that looks across the whole record, identifies the uncertainty most worth reducing, and tells me which measurement would reduce it. My fitness advisor already answers a similar question: what's the highest-value thing I can do with the next 30 minutes? The next version of the health advisor will ask the same question of the record.</p>
 
 <h2>What should I measure next?</h2>
 
-<p>The 2014 piece ended with two blood-pressure numbers I didn't know what to do with. They're in the vault now. As best I can tell the reading behind that essay was taken on January 24, 2014, and it was 122/74. It sits in a table with every other blood pressure I have on record, from 2012 to this summer, each one cited to the document it came from.</p>
+<p>The 2014 piece ended with two blood-pressure numbers I didn't know what to do with. They're in the vault now. As best I can tell the reading behind that piece was taken on January 24, 2014, and it was 122/74. It sits in a table with every other blood pressure I have on record, from 2012 to this summer, each one cited to the document it came from.</p>
 
 <div class="artifact">
 <p class="src"><span>reading-room/trends/blood-pressure.md · generated from the vault</span><span class="date">trimmed · through 2026-0048</span></p>
@@ -616,9 +618,9 @@ outlives me                                   long-term</pre></div>
 2026-07-27  112/74                 annual exam, seated     [2026-0040]</pre></div>
 </div>
 
-<p>The record still doesn't hand me an answer, for the blood pressure or for the ferritin. What it can do now is put this summer's 112/74 next to fourteen years of my own readings, as well as the population range, instead of leaving it as another isolated number. The next version needs to do something harder: decide what evidence is worth collecting next.</p>
+<p>The record still doesn't hand me an answer, for the blood pressure or for the ferritin. What it can do now is put this summer's 112/74 next to fourteen years of my own readings, as well as the population range, instead of leaving it as another isolated number.</p>
 
-<p>So what do I do with those two numbers? Twelve years later I have an answer, at least for now. They go into a system I own and keep improving, where I can reliably use them to make better decisions and build more on top of them. That was the idea I took from David Deutsch's The Beginning of Infinity, which I cited at the end of the 2014 piece. Progress comes from a process that corrects its own errors and doesn't have a final state. In 2014 I had the idea and not the process. Now I have the first version of the process, and the two numbers are in it.</p>
+<p>So what do I do with those two numbers? Twelve years later I have an answer, at least for now. They go into a system I own and keep improving, where they're finally usable. That was the idea I took from David Deutsch's The Beginning of Infinity, which I cited at the end of the 2014 piece. Progress comes from a process that corrects its own errors and doesn't have a final state. In 2014 I had the idea and not the process. Now I have the first version of the process, and the two numbers are in it.</p>
 
 <p class="more"><a href="../writing.html">More writing →</a> <span style="margin:0 12px;color:var(--faint)">·</span> <a href="../map.html">How it fits together →</a></p>
 <footer>
@@ -627,5 +629,32 @@ outlives me                                   long-term</pre></div>
 </footer>
 </main>
 <script data-goatcounter="https://laurencefavrot.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+/* align each margin note with the line that carries its marker (desktop only) */
+(function(){
+  function align(){
+    var wide=window.matchMedia('(min-width:841px)').matches;
+    document.querySelectorAll('aside.note').forEach(function(n){
+      n.style.marginTop='';
+      if(!wide) return;
+      var label=n.querySelector('.label'); if(!label) return;
+      var sym=label.textContent.trim().charAt(0);
+      var el=n.nextElementSibling, fn=null;
+      while(el && !fn){
+        fn=Array.prototype.slice.call(el.querySelectorAll('.fn')).filter(function(s){return s.textContent.trim()===sym;})[0];
+        if(!fn) el=el.nextElementSibling;
+      }
+      if(!fn) return;
+      var d=fn.getBoundingClientRect().top-label.getBoundingClientRect().top;
+      var cur=parseFloat(getComputedStyle(n).marginTop)||0;
+      if(d>0) n.style.marginTop=(cur+d)+'px';
+    });
+  }
+  align();
+  window.addEventListener('load',align);
+  window.addEventListener('resize',align);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(align);
+})();
+</script>
 </body>
 </html>

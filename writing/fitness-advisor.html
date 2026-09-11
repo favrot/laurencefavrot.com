@@ -423,5 +423,32 @@ deviations, PENDING, README, BACKLOG — every citation bumped [C016.r1]→[C016
 </footer>
 </main>
 <script data-goatcounter="https://laurencefavrot.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+/* align each margin note with the line that carries its marker (desktop only) */
+(function(){
+  function align(){
+    var wide=window.matchMedia('(min-width:841px)').matches;
+    document.querySelectorAll('aside.note').forEach(function(n){
+      n.style.marginTop='';
+      if(!wide) return;
+      var label=n.querySelector('.label'); if(!label) return;
+      var sym=label.textContent.trim().charAt(0);
+      var el=n.nextElementSibling, fn=null;
+      while(el && !fn){
+        fn=Array.prototype.slice.call(el.querySelectorAll('.fn')).filter(function(s){return s.textContent.trim()===sym;})[0];
+        if(!fn) el=el.nextElementSibling;
+      }
+      if(!fn) return;
+      var d=fn.getBoundingClientRect().top-label.getBoundingClientRect().top;
+      var cur=parseFloat(getComputedStyle(n).marginTop)||0;
+      if(d>0) n.style.marginTop=(cur+d)+'px';
+    });
+  }
+  align();
+  window.addEventListener('load',align);
+  window.addEventListener('resize',align);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(align);
+})();
+</script>
 </body>
 </html>
