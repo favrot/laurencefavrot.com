@@ -38,6 +38,8 @@ p:last-child{margin-bottom:0}
 h2{font-family:var(--mono);font-size:15px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-paper);margin:0 0 16px}
 .lede{font-size:19.5px;line-height:1.6;color:var(--ink);margin-bottom:40px}
 .lede strong{font-weight:500}
+.lede p{color:var(--ink);margin:0 0 18px}
+.lede p:last-child{margin-bottom:0}
 section{margin-bottom:40px}
 section:last-child{margin-bottom:0}
 ul,ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:14px;max-width:540px;color:var(--body)}
